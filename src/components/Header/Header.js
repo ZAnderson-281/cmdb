@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Slide, IconButton } from "@material-ui/core";
 import { Styles } from "../Styles/styles";
 import Sidebar from "../Sidebar/Sidebar";
 
-function Header() {
+function Header({ location }) {
   const classes = Styles();
 
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
@@ -23,7 +23,7 @@ function Header() {
 
         <Slide in={sidebarExpanded} direction={"right"}>
           <div>
-            <Sidebar />
+            <Sidebar location={location} />
           </div>
         </Slide>
       </AppBar>

@@ -8,12 +8,12 @@ export const dashboardStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     padding: "1rem",
     height: "fit-content",
-    backgroundColor: "red",
+    backgroundColor: "#fefefe",
   },
   bodyContainer: {
+    display: "flex",
     margin: "1rem 5rem",
     padding: "1rem",
     height: "fit-content",
-    backgroundColor: "red",
   },
 }));

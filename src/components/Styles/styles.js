@@ -14,7 +14,7 @@ export const Styles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     height: "100vh",
-    width: "12rem",
+    width: "14rem",
     backgroundColor: "#31427a",
     pointerEvents: "auto",
     color: "#fff",

@@ -1,12 +1,12 @@
 import React from "react";
 import { Styles } from "../Styles/styles";
 
-function Sidebar() {
+function Sidebar({ location }) {
   const classes = Styles();
   return (
     <div className={classes.sideBar}>
       <div className={classes.sideBarLinkContainer}>
-        <h1>Test</h1>
+        <h1>{location}</h1>
       </div>
     </div>
   );

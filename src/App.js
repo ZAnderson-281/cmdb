@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <Header />
+        <Header location="Dashboard" />
         <div className="dashboard-container">
           <Dashboard />
         </div>
