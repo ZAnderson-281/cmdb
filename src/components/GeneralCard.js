@@ -6,13 +6,35 @@ import {
   IconButton,
   Collapse,
   Button,
+  InputBase,
+  withStyles,
+  fade,
 } from "@material-ui/core";
 import { CirclePicker } from "react-color";
+
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    position: "relative",
+    fontSize: "13pt",
+    fontWeight: "bold",
+    padding: "10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    "&:focus": {
+      borderBottom: `3px solid #222 `,
+    },
+  },
+}))(InputBase);
 
 function GeneralCard({ cardTitle, content }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#607d8b");
   const [textColor, setTextColor] = useState("#222");
+  const [input, setInput] = useState(cardTitle);
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
@@ -26,6 +48,10 @@ function GeneralCard({ cardTitle, content }) {
   const resetColors = () => {
     setColor("#607d8b");
     setTextColor("#222");
+  };
+  const handleCardNameChange = (e) => {
+    console.log(e.target.value);
+    setInput(e.target.value);
   };
 
   return (
@@ -48,7 +74,13 @@ function GeneralCard({ cardTitle, content }) {
         <CardHeader
           className="card-header"
           style={{ backgroundColor: color, color: textColor }}
-          avatar={<h3>{cardTitle}</h3>}
+          avatar={
+            <BootstrapInput
+              value={input}
+              style={{ color: textColor }}
+              onChange={handleCardNameChange}
+            />
+          }
           action={
             <>
               <IconButton aria-label="settings" onClick={toggleModal}>

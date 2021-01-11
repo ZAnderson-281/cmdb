@@ -221,3 +221,7 @@ nav {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
 }
+.title-input {
+  font-size: 24pt;
+  font-weight: bold;
+}
