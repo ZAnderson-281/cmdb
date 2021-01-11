@@ -155,10 +155,19 @@ nav {
   grid-column: 1/4;
 }
 
+.dashboard-sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1.8rem;
+}
+
 .card {
   min-height: 200px;
   background-color: rgb(185, 185, 185);
 }
+/* .card-header {
+  background-color: rgb(231, 231, 231);
+} */
 
 .sidebar-link {
   display: flex;
@@ -173,4 +182,42 @@ nav {
 .active-sidebar {
   background-color: rgb(48, 37, 199);
   border-radius: 25px;
+}
+
+.gen-modal {
+  /* position: absolute; */
+  width: 100px;
+  height: 200px;
+  background-color: rgb(231, 231, 231);
+  z-index: 1;
+}
+
+.card-settings-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 0.6rem;
+  color: rgb(245, 245, 245);
+  font-size: 16pt;
+}
+.card-settings {
+  max-height: 200px;
+  overflow-y: scroll;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  background-color: rgb(71, 58, 247);
+}
+.picker {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 0.6rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
 }
