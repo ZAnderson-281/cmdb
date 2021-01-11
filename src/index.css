@@ -64,7 +64,7 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
-  background-color: rgb(240, 240, 240);
+  background-color: #dfdfdf;
 }
 ul {
   list-style-type: none;
@@ -114,7 +114,9 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background-color: rgb(247, 247, 247);
+  /* background-color: rgb(247, 247, 247); */
+  background-color: rgb(71, 58, 247);
+  color: rgb(247, 247, 247);
 }
 
 .nav-links {
@@ -128,21 +130,47 @@ nav {
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(auto, auto);
 
   grid-gap: 1rem;
   margin: 0.5rem;
   padding: 0.5rem;
+  background-color: rgb(247, 247, 247);
+  border-radius: 5px;
+  border-left: 6px solid rgb(71, 58, 247);
 }
 .dashboard-sidebar {
-  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
   margin: 0.5rem;
   padding: 0.5rem;
   background-color: rgb(71, 58, 247);
+  border-radius: 30px;
 }
 
 .dashboard-title {
   grid-column: 1/4;
 }
+
 .card {
   min-height: 200px;
+  background-color: rgb(185, 185, 185);
+}
+
+.sidebar-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 0.6rem;
+  color: rgb(245, 245, 245);
+  font-size: 16pt;
+}
+.active-sidebar {
+  background-color: rgb(48, 37, 199);
+  border-radius: 25px;
 }
