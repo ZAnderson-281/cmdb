@@ -1,18 +1,15 @@
 import React from "react";
 import { Card, CardContent } from "@material-ui/core";
 
-import { towerStyles } from "../Styles/towerStyles";
-
-function GeneralCard({ item }) {
-  const classes = towerStyles();
+function GeneralCard() {
   return (
-    <div>
-      <Card>
+    <>
+      <Card className="card">
         <CardContent>
-          <h1>{item}</h1>
+          <h4>Card</h4>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }
 
