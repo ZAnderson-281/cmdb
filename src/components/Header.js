@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <nav>
-      <h2>Dashey</h2>
+      <h2>Dashy</h2>
       <ul className="nav-links">
         <li>
           <h4></h4>

@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React from "react";
 import GeneralCard from "../Cards/GeneralCard";
 import ListCard from "../Cards/ListCard";
 import GraphCard from "../Cards/GraphCard";
@@ -16,7 +16,9 @@ function Dashboard() {
       return <GeneralCard key={elem.id} cardTitle={elem.title} />;
     }
     if (elem.type === "lc") {
-      return <ListCard key={elem.id} cardTitle={elem.title} />;
+      return (
+        <ListCard key={elem.id} cardTitle={elem.title} items={elem.items} />
+      );
     }
     if (elem.type === "gr") {
       console.log(elem);
@@ -36,6 +38,7 @@ function Dashboard() {
         {dbw.map((elem) => {
           return createElements(elem);
         })}
+        {!dbw && <p>No widget data available</p>}
       </section>
     </div>
   );

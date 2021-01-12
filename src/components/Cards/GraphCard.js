@@ -20,7 +20,7 @@ import {
 
 function GeneralCard({ cardTitle, content }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
-  const [color, setColor] = useState("#607d8b");
+  const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
   const [input, setInput] = useState(cardTitle);
   const data = [
@@ -46,7 +46,7 @@ function GeneralCard({ cardTitle, content }) {
     setTextColor(color.hex);
   };
   const resetColors = () => {
-    setColor("#607d8b");
+    setColor("#eaeaea");
     setTextColor("#222");
   };
   const handleCardNameChange = (e) => {

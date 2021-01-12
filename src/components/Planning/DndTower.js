@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import GeneralCard from "../Cards/GeneralCard";
 import ListCard from "../Cards/ListCard";
 
 const uniqid = require("uniqid");
@@ -106,10 +107,10 @@ const Index = () => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <ListCard
+                              <GeneralCard
                                 cardTitle={item.title}
                                 content={item.content}
-                              ></ListCard>
+                              ></GeneralCard>
                             </div>
                           );
                         }}

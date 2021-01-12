@@ -6,13 +6,13 @@ import {
   IconButton,
   Collapse,
   Button,
-  InputBase,
-  withStyles,
 } from "@material-ui/core";
+
 import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
+import ListCardItem from "./ListCardItem";
 
-function GeneralCard({ cardTitle, content }) {
+function GeneralCard({ cardTitle, items }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
@@ -28,7 +28,7 @@ function GeneralCard({ cardTitle, content }) {
     setTextColor(color.hex);
   };
   const resetColors = () => {
-    setColor("#2196f3");
+    setColor("#eaeaea");
     setTextColor("#222");
   };
   const handleCardNameChange = (e) => {
@@ -73,7 +73,9 @@ function GeneralCard({ cardTitle, content }) {
         />
 
         <CardContent>
-          <h4>{content}</h4>
+          {items.map((elem) => {
+            return <ListCardItem key={elem.id} {...elem} />;
+          })}
         </CardContent>
       </Card>
     </>
