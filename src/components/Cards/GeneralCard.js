@@ -6,29 +6,9 @@ import {
   IconButton,
   Collapse,
   Button,
-  InputBase,
-  withStyles,
-  fade,
 } from "@material-ui/core";
 import { CirclePicker } from "react-color";
-
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    position: "relative",
-    fontSize: "13pt",
-    fontWeight: "bold",
-    padding: "10px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    "&:focus": {
-      borderBottom: `3px solid #222 `,
-    },
-  },
-}))(InputBase);
+import { CustomInput } from "./CustomInput";
 
 function GeneralCard({ cardTitle, content }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
@@ -75,7 +55,7 @@ function GeneralCard({ cardTitle, content }) {
           className="card-header"
           style={{ backgroundColor: color, color: textColor }}
           avatar={
-            <BootstrapInput
+            <CustomInput
               value={input}
               style={{ color: textColor }}
               onChange={handleCardNameChange}

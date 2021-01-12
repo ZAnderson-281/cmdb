@@ -1,9 +1,11 @@
 import React from "react";
-
+import DndTower from "./DndTower";
 function index() {
   return (
     <div>
-      <h1>Planning</h1>
+      <section className="dashboard-body">
+        <DndTower />
+      </section>
     </div>
   );
 }
