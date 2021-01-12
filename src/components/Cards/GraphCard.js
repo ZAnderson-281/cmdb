@@ -10,13 +10,7 @@ import {
 import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
 // React Charts
-import {
-  FlexibleXYPlot,
-  VerticalBarSeries,
-  XAxis,
-  YAxis,
-  LineSeries,
-} from "react-vis";
+import { FlexibleXYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
 
 function GeneralCard({ cardTitle, content }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);

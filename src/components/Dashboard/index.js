@@ -2,13 +2,23 @@ import React from "react";
 import GeneralCard from "../Cards/GeneralCard";
 import ListCard from "../Cards/ListCard";
 import GraphCard from "../Cards/GraphCard";
+import DeadlineCard from "../Cards/DeadlineCard";
 import { IconButton } from "@material-ui/core";
 import { useGlobalContext } from "../../context";
+
+const uniqid = require("uniqid");
+
 function Dashboard() {
   const { dbw, setDashboardWidgets } = useGlobalContext();
 
   const handleAddWidget = () => {
-    setDashboardWidgets([]);
+    const widget = {
+      id: uniqid(),
+      type: "gc",
+      title: "Testing Card Creation",
+      items: [],
+    };
+    setDashboardWidgets([widget, ...dbw]);
   };
 
   const createElements = (elem) => {
@@ -21,8 +31,10 @@ function Dashboard() {
       );
     }
     if (elem.type === "gr") {
-      console.log(elem);
       return <GraphCard key={elem.id} cardTitle={elem.title} />;
+    }
+    if (elem.type === "dl") {
+      return <DeadlineCard key={elem.id} cardTitle={elem.title} />;
     }
   };
 

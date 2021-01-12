@@ -1,55 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import GeneralCard from "../Cards/GeneralCard";
-import ListCard from "../Cards/ListCard";
-
-const uniqid = require("uniqid");
-
-const todo = [
-  { id: uniqid(), title: "test1", content: "One" },
-  { id: uniqid(), title: "test2", content: "Two" },
-  { id: uniqid(), title: "test3", content: "Three" },
-  { id: uniqid(), title: "test4", content: "Four" },
-];
-const inProgress = [
-  { id: uniqid(), title: "test5", content: "Five" },
-  { id: uniqid(), title: "test6", content: "Six" },
-];
-const completed = [
-  { id: uniqid(), title: "test7", content: "Nine" },
-  { id: uniqid(), title: "test8", content: "Ten" },
-];
-
-const backend = {
-  [uniqid()]: {
-    name: "Todo",
-    items: todo,
-  },
-  [uniqid()]: {
-    name: "In Progress",
-    items: inProgress,
-  },
-  [uniqid()]: {
-    name: "Done",
-    items: completed,
-  },
-};
+import { useGlobalContext } from "../../context";
 
 const Index = () => {
-  const [columns, setColumns] = useState(backend);
+  const { columns, setColumns } = useGlobalContext();
+
+  // After drag completed and mouse/key is up
   const onDragEnd = (result, columns, setColumns) => {
+    //If end position is not a droppable position do nothing
     if (!result.destination) {
       return;
     }
+    // Get start and end position
     const { source, destination } = result;
+
+    // If its not the same container at drag end
     if (source.droppableId !== destination.droppableId) {
+      // Set vars for start and end columns and their items
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
+
+      // Remove from source list and add to destination list
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
+      // Update state
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -92,7 +70,6 @@ const Index = () => {
                     background: snapshot.isDraggingOver ? "lightblue" : "none",
                   }}
                 >
-                  <h2>{column.name}</h2>
                   {column.items.map((item, index) => {
                     return (
                       <Draggable

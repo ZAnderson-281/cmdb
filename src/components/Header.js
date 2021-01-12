@@ -1,22 +1,19 @@
 import React from "react";
-
+// import { Avatar } from "@material-ui/core";
 function Header() {
   return (
     <nav>
       <h2>Dashy</h2>
       <ul className="nav-links">
-        <li>
-          <h4></h4>
+        {/* <li>
+          <Avatar>Z</Avatar>
         </li>
         <li>
-          <h4></h4>
+          <Avatar>S</Avatar>
         </li>
         <li>
-          <h4></h4>
-        </li>
-        <li>
-          <h4></h4>
-        </li>
+          <Avatar>D</Avatar>
+        </li> */}
       </ul>
     </nav>
   );

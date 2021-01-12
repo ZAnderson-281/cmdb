@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
 
 function SidebarNav() {
-  const { active, setActive } = useGlobalContext();
-
-  const handleLinkClick = (e) => {
-    console.log(e.target);
-  };
+  const handleLinkClick = (e) => {};
   return (
     <div className="dashboard-sidebar dashboard-sidebar-sticky">
       <Link to="/">
@@ -18,8 +13,8 @@ function SidebarNav() {
       </Link>
       <Link to="/Planning">
         <div className="sidebar-link " onClick={handleLinkClick}>
-          <i className="fas fa-th"></i>
-          <h6>Planning</h6>
+          <i className="fas fa-tasks"></i>
+          <h6>Project</h6>
         </div>
       </Link>
       <Link to="/Settings">

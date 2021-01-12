@@ -46,12 +46,44 @@ export const dashboardWidgets = [
   },
   {
     id: uniqid(),
-    type: "gr",
+    type: "dl",
     title: "TESTING",
   },
-  {
-    id: uniqid(),
-    type: "gc",
-    title: "TESTING",
-  },
+  // {
+  //   id: uniqid(),
+  //   type: "gc",
+  //   title: "TESTING",
+  // },
 ];
+
+// =====  PLANNING KANBAN  =====
+
+const todo = [
+  { id: uniqid(), title: "test1", content: "One" },
+  { id: uniqid(), title: "test2", content: "Two" },
+  { id: uniqid(), title: "test3", content: "Three" },
+  { id: uniqid(), title: "test4", content: "Four" },
+];
+const inProgress = [
+  { id: uniqid(), title: "test5", content: "Five" },
+  { id: uniqid(), title: "test6", content: "Six" },
+];
+const completed = [
+  { id: uniqid(), title: "test7", content: "Nine" },
+  { id: uniqid(), title: "test8", content: "Ten" },
+];
+
+export const backend = {
+  [uniqid()]: {
+    name: "Todo",
+    items: todo,
+  },
+  [uniqid()]: {
+    name: "In Progress",
+    items: inProgress,
+  },
+  [uniqid()]: {
+    name: "Done",
+    items: completed,
+  },
+};

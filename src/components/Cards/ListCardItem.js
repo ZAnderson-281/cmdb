@@ -7,7 +7,6 @@ import {
   CardHeader,
   IconButton,
   Collapse,
-  Button,
   Avatar,
 } from "@material-ui/core";
 
@@ -26,7 +25,7 @@ function ListCardItem({ name, description, time, content }) {
           subheader={description}
           action={
             <IconButton onClick={toggleUi}>
-              <i class="fas fa-chevron-down"></i>
+              <i className="fas fa-chevron-down"></i>
             </IconButton>
           }
         />
