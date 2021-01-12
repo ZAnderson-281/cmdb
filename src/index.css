@@ -64,7 +64,7 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
-  background-color: #dfdfdf;
+  background-color: #fefefe;
 }
 ul {
   list-style-type: none;
@@ -115,8 +115,8 @@ nav {
   justify-content: space-between;
   padding: 1rem;
   /* background-color: rgb(247, 247, 247); */
-  background-color: rgb(71, 58, 247);
-  color: rgb(247, 247, 247);
+  background-color: rgb(248, 248, 248);
+  color: #222;
 }
 
 .nav-links {
@@ -135,24 +135,47 @@ nav {
   grid-gap: 1rem;
   margin: 0.5rem;
   padding: 0.5rem;
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(238, 238, 238);
   border-radius: 5px;
-  border-left: 6px solid rgb(71, 58, 247);
+  /* border-left: 6px solid rgb(71, 58, 247); */
 }
+.planning-body {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+
+  grid-gap: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  /* background-color: rgb(235, 235, 235); */
+  border-radius: 5px;
+  /* border-left: 6px solid #e4e4e4; */
+  /* background-color: #eeeeee; */
+}
+
 .dashboard-sidebar {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
   height: 80vh;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  background-color: rgb(71, 58, 247);
+  margin: 0.2rem;
+  padding: 1.5rem;
+  /* background-color: rgb(71, 58, 247); */
+  background-color: rgb(238, 238, 238);
   border-radius: 30px;
 }
 
-.dashboard-title {
-  grid-column: 1/4;
+.title {
+  margin: 1rem 1rem;
+  font-size: 32pt;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .dashboard-sidebar-sticky {
@@ -176,13 +199,14 @@ nav {
   flex-direction: column;
   margin: 1rem;
   padding: 0.6rem;
-  color: rgb(245, 245, 245);
+  /* color: rgb(245, 245, 245); */
+  color: #222;
   font-size: 16pt;
 }
-.active-sidebar {
+/* .active-sidebar {
   background-color: rgb(48, 37, 199);
   border-radius: 25px;
-}
+} */
 
 .gen-modal {
   /* position: absolute; */

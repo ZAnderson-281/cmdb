@@ -3,7 +3,8 @@ import DndTower from "./DndTower";
 function index() {
   return (
     <div>
-      <section className="dashboard-body">
+      <h2 className="title">Planning</h2>
+      <section className="planning-body">
         <DndTower />
       </section>
     </div>

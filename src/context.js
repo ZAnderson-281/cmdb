@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
-// import { TaskData } from "./data";
+import React, { useContext, useState } from "react";
+import { dashboardWidgets } from "./MOCK";
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+  const [dbw, setDashboardWidgets] = useState(dashboardWidgets);
+  return (
+    <AppContext.Provider value={{ dbw, setDashboardWidgets }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 // Create hook to use context

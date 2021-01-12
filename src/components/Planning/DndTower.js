@@ -88,9 +88,10 @@ const Index = () => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   style={{
-                    background: snapshot.isDraggingOver ? "lightblue" : "white",
+                    background: snapshot.isDraggingOver ? "lightblue" : "none",
                   }}
                 >
+                  <h2>{column.name}</h2>
                   {column.items.map((item, index) => {
                     return (
                       <Draggable
