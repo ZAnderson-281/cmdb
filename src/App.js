@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import SidebarNav from "./components/SidebarNav";
 
-import Dashboard from "./components/Dashboard";
-import Error from "./components/Error";
+// import Dashboard from "./components/Dashboard";
+import Error from "./components/Error/";
+import Planning from "./components/Planning/";
+import Settings from "./components/Settings/";
+import Dashboard from "./components/Dashboard/";
 
 function App() {
   return (
@@ -18,6 +21,12 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Dashboard />
+            </Route>
+            <Route exact path="/Planning">
+              <Planning />
+            </Route>
+            <Route exact path="/Settings">
+              <Settings />
             </Route>
             <Route path="*">
               <Error />
