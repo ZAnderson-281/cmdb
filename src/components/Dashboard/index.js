@@ -18,12 +18,12 @@ function Dashboard() {
     setIsDashboardModalOpen,
   } = useGlobalContext();
 
-  const handleAddWidget = (type) => {
+  const handleAddWidget = (type, name) => {
     console.log(type);
     const widget = {
       id: uniqid(),
       type: type,
-      title: type,
+      title: name,
       items: [],
     };
     setDashboardWidgets([widget, ...dbw]);

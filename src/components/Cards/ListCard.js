@@ -72,7 +72,7 @@ function GeneralCard({ cardTitle, items }) {
           }
         />
 
-        <CardContent>
+        <CardContent className="card-body">
           {items.map((elem) => {
             return <ListCardItem key={elem.id} {...elem} />;
           })}

@@ -188,12 +188,18 @@ nav {
 }
 
 .card {
-  min-height: 200px;
+  max-height: 400px;
   background-color: rgb(185, 185, 185);
 }
-/* .card-header {
-  background-color: rgb(231, 231, 231);
-} */
+.card-body {
+  max-height: 80%;
+  overflow-y: scroll;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+}
 
 .sidebar-link {
   display: flex;
@@ -206,10 +212,6 @@ nav {
   color: #222;
   font-size: 16pt;
 }
-/* .active-sidebar {
-  background-color: rgb(48, 37, 199);
-  border-radius: 25px;
-} */
 
 .gen-modal {
   /* position: absolute; */
@@ -252,10 +254,6 @@ nav {
   font-size: 24pt;
   font-weight: bold;
 }
-
-/* .test {
-  background-color: #f54545;
-} */
 
 .bar {
   width: 100%;

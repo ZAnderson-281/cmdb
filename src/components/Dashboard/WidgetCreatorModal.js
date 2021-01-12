@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   FormControl,
   Select,
   MenuItem,
   InputLabel,
+  TextField,
   Paper,
   makeStyles,
   Button,
@@ -29,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
 function WidgetCreatorModal({ handleAddWidget }) {
   const { isDashboardModalOpen, setIsDashboardModalOpen } = useGlobalContext();
   const classes = useStyles();
-  const [type, setType] = React.useState("gc");
+  const [type, setType] = useState("gc");
+  const [name, setName] = useState("");
 
-  const handleCardTypeChange = (event) => {
-    setType(event.target.value);
+  const handleCardTypeChange = (e) => {
+    setType(e.target.value);
+  };
+  const handleCardNameChange = (e) => {
+    setName(e.target.value);
   };
 
   const handleClose = () => {
@@ -49,6 +54,7 @@ function WidgetCreatorModal({ handleAddWidget }) {
         <Paper className={classes.paper}>
           <h3 className="title">Widget Menu</h3>
           <div className="modal-form">
+            {/* Type Select */}
             <FormControl className={classes.formControl}>
               <InputLabel id="type-select-label">Type</InputLabel>
               <Select
@@ -62,9 +68,18 @@ function WidgetCreatorModal({ handleAddWidget }) {
                 <MenuItem value={"gr"}>Stats</MenuItem>
               </Select>
             </FormControl>
+            {/* Name */}
+            <FormControl className={classes.formControl}>
+              <TextField
+                id="standard-name"
+                label="Name"
+                value={name}
+                onChange={handleCardNameChange}
+              />
+            </FormControl>
             <Button
               onClick={() => {
-                handleAddWidget(type);
+                handleAddWidget(type, name);
               }}
             >
               Create Card

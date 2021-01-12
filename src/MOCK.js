@@ -29,6 +29,27 @@ const listComponentMockArray = [
     time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
     content: "completed general changes and reformed the dashboard styleing",
   },
+  {
+    id: uniqid(),
+    name: "Danial",
+    description: "General",
+    time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
+    content: "completed general changes and reformed the dashboard styleing",
+  },
+  {
+    id: uniqid(),
+    name: "Danial",
+    description: "General",
+    time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
+    content: "completed general changes and reformed the dashboard styleing",
+  },
+  {
+    id: uniqid(),
+    name: "Danial",
+    description: "General",
+    time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
+    content: "completed general changes and reformed the dashboard styleing",
+  },
 ];
 
 export const dashboardWidgets = [
@@ -43,11 +64,6 @@ export const dashboardWidgets = [
     type: "lc",
     title: "Log Ins",
     items: listComponentMockArray,
-  },
-  {
-    id: uniqid(),
-    type: "gr",
-    title: "Graph",
   },
 ];
 
