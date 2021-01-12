@@ -3,22 +3,31 @@ import GeneralCard from "../Cards/GeneralCard";
 import ListCard from "../Cards/ListCard";
 import GraphCard from "../Cards/GraphCard";
 import DeadlineCard from "../Cards/DeadlineCard";
+import WidgetCreatorModal from "./WidgetCreatorModal";
+
 import { IconButton } from "@material-ui/core";
 import { useGlobalContext } from "../../context";
 
 const uniqid = require("uniqid");
 
 function Dashboard() {
-  const { dbw, setDashboardWidgets } = useGlobalContext();
+  const {
+    dbw,
+    setDashboardWidgets,
+    isDashboardModalOpen,
+    setIsDashboardModalOpen,
+  } = useGlobalContext();
 
-  const handleAddWidget = () => {
+  const handleAddWidget = (type) => {
+    console.log(type);
     const widget = {
       id: uniqid(),
-      type: "gc",
-      title: "Testing Card Creation",
+      type: type,
+      title: type,
       items: [],
     };
     setDashboardWidgets([widget, ...dbw]);
+    setIsDashboardModalOpen(true);
   };
 
   const createElements = (elem) => {
@@ -33,7 +42,7 @@ function Dashboard() {
     if (elem.type === "gr") {
       return <GraphCard key={elem.id} cardTitle={elem.title} />;
     }
-    if (elem.type === "dl") {
+    if (elem.type === "dc") {
       return <DeadlineCard key={elem.id} cardTitle={elem.title} />;
     }
   };
@@ -51,6 +60,9 @@ function Dashboard() {
           return createElements(elem);
         })}
         {!dbw && <p>No widget data available</p>}
+        {isDashboardModalOpen && (
+          <WidgetCreatorModal handleAddWidget={handleAddWidget} />
+        )}
       </section>
     </div>
   );

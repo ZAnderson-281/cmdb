@@ -46,14 +46,9 @@ export const dashboardWidgets = [
   },
   {
     id: uniqid(),
-    type: "dl",
-    title: "TESTING",
+    type: "gr",
+    title: "Graph",
   },
-  // {
-  //   id: uniqid(),
-  //   type: "gc",
-  //   title: "TESTING",
-  // },
 ];
 
 // =====  PLANNING KANBAN  =====

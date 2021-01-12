@@ -12,11 +12,12 @@ import { CustomInput } from "./CustomInput";
 // React Charts
 import { FlexibleXYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
 
-function GeneralCard({ cardTitle, content }) {
+function GraphCard({ cardTitle, content }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
   const [input, setInput] = useState(cardTitle);
+
   const data = [
     { x: 0, y: 8 },
     { x: 1, y: 5 },
@@ -96,4 +97,4 @@ function GeneralCard({ cardTitle, content }) {
   );
 }
 
-export default GeneralCard;
+export default GraphCard;

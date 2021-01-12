@@ -22,7 +22,7 @@ function Index() {
       ...columns,
       [key]: {
         ...[key],
-        items: [...items, data],
+        items: [data, ...items],
       },
     });
   };

@@ -5,10 +5,18 @@ const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
   const [dbw, setDashboardWidgets] = useState(dashboardWidgets);
   const [columns, setColumns] = useState(backend);
+  const [isDashboardModalOpen, setIsDashboardModalOpen] = useState(false);
 
   return (
     <AppContext.Provider
-      value={{ dbw, setDashboardWidgets, columns, setColumns }}
+      value={{
+        dbw,
+        setDashboardWidgets,
+        columns,
+        setColumns,
+        isDashboardModalOpen,
+        setIsDashboardModalOpen,
+      }}
     >
       {children}
     </AppContext.Provider>
