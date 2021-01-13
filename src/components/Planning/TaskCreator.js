@@ -1,5 +1,13 @@
-import React from "react";
-import { Modal, Paper, makeStyles, Button } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Modal,
+  Paper,
+  makeStyles,
+  Button,
+  FormControl,
+  TextField,
+  StepContent,
+} from "@material-ui/core";
 import { useGlobalContext } from "../../context";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,11 +28,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TaskCreatorModal({ handleAddWidget }) {
-  const { setIsModalOpen, isModalOpen } = useGlobalContext();
   const classes = useStyles();
 
+  const { setIsModalOpen, isModalOpen } = useGlobalContext();
+
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+
+  //   Handle Events
   const handleClose = () => {
     setIsModalOpen(false);
+  };
+  const handleCardNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+  };
+  const handleFormSubmit = (e) => {
+    handleAddWidget(name, content);
   };
 
   return (
@@ -33,13 +55,30 @@ function TaskCreatorModal({ handleAddWidget }) {
         <Paper className={classes.paper}>
           <h3 className="title">Widget Menu</h3>
           <div className="modal-form">
-            <Button
-              onClick={() => {
-                handleAddWidget();
-              }}
-            >
-              Create Card
-            </Button>
+            {/* Name Card */}
+            <FormControl className={classes.formControl}>
+              <TextField
+                id="standard-name"
+                label="Card Name"
+                value={name}
+                autoFocus
+                onChange={handleCardNameChange}
+              />
+            </FormControl>
+
+            {/* Input Content */}
+            <FormControl className={classes.formControl}>
+              <TextField
+                id="standard-name"
+                label="Task"
+                value={content}
+                autoFocus
+                onChange={handleContentChange}
+                multiline
+              />
+            </FormControl>
+
+            <Button onClick={handleFormSubmit}>Create Card</Button>
           </div>
         </Paper>
       </div>

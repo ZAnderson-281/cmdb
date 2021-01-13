@@ -13,16 +13,15 @@ function Index() {
     setIsModalOpen,
   } = useGlobalContext();
 
-  const handleAddWidget = () => {
+  const handleAddWidget = (cardName, content) => {
     const data = {
       id: uniqid(),
-      title: "Added Task",
-      content: "Added Task",
+      title: cardName,
+      content: content,
     };
 
     const [key] = Object.keys(columns);
     const items = columns[key].items;
-    console.log(items);
 
     setColumns({
       ...columns,
