@@ -6,7 +6,9 @@ import {
   Button,
   FormControl,
   TextField,
-  StepContent,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@material-ui/core";
 import { useGlobalContext } from "../../context";
 
@@ -34,6 +36,7 @@ function TaskCreatorModal({ handleAddWidget }) {
 
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
+  const [priority, setPriority] = useState("");
 
   //   Handle Events
   const handleClose = () => {
@@ -41,6 +44,9 @@ function TaskCreatorModal({ handleAddWidget }) {
   };
   const handleCardNameChange = (e) => {
     setName(e.target.value);
+  };
+  const handleCardPriorityChange = (e) => {
+    setPriority(e.target.value);
   };
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -64,6 +70,20 @@ function TaskCreatorModal({ handleAddWidget }) {
                 autoFocus
                 onChange={handleCardNameChange}
               />
+            </FormControl>
+
+            {/* Priority Select */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="type-select-label">Priority Type</InputLabel>
+              <Select
+                labelId="type-select-label"
+                value={priority}
+                onChange={handleCardPriorityChange}
+              >
+                <MenuItem value={1}>Low</MenuItem>
+                <MenuItem value={2}>Default</MenuItem>
+                <MenuItem value={3}>High</MenuItem>
+              </Select>
             </FormControl>
 
             {/* Input Content */}

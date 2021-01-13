@@ -18,6 +18,10 @@ function Dashboard() {
     setIsModalOpen,
   } = useGlobalContext();
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   const handleAddWidget = (type, name) => {
     console.log(type);
     const widget = {
@@ -27,7 +31,6 @@ function Dashboard() {
       items: [],
     };
     setDashboardWidgets([widget, ...dbw]);
-    setIsModalOpen(true);
   };
 
   const createElements = (elem) => {
@@ -51,7 +54,7 @@ function Dashboard() {
     <div>
       <div className="title">
         <h2>Dashboard</h2>
-        <IconButton onClick={handleAddWidget}>
+        <IconButton onClick={handleOpenModal}>
           <i className="fas fa-plus"></i>
         </IconButton>
       </div>

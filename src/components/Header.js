@@ -1,19 +1,21 @@
 import React from "react";
-// import { Avatar } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
+import { useGlobalContext } from "../context";
 function Header() {
+  const { isUser, setIsUser } = useGlobalContext();
+  const handleLogin = () => {
+    setIsUser(!isUser);
+  };
+
   return (
     <nav>
       <h2>Dashy</h2>
       <ul className="nav-links">
-        {/* <li>
-          <Avatar>Z</Avatar>
-        </li>
+        <li></li>
+        <li></li>
         <li>
-          <Avatar>S</Avatar>
+          <Avatar onClick={handleLogin}>{isUser ? "Z" : " "}</Avatar>
         </li>
-        <li>
-          <Avatar>D</Avatar>
-        </li> */}
       </ul>
     </nav>
   );
