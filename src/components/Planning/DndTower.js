@@ -10,6 +10,7 @@ const Index = () => {
     setColumns,
     isUser,
     currentUser,
+    setCurrentUser,
     logData,
     setLogData,
   } = useGlobalContext();
@@ -49,6 +50,9 @@ const Index = () => {
           },
         });
         updateLog(sourceColumn, destColumn, sourceItems, destItems, [removed]);
+        if (destColumn.name === "Done") {
+          updateCommits();
+        }
       } else {
         const column = columns[source.droppableId];
         const coppiedItems = [...column.items];
@@ -78,12 +82,20 @@ const Index = () => {
     const data = {
       id: uniqid(),
       name: `${currentUser.name}`,
-      description: `${currentUser.name} moved ${removed[0].title} to ${destColumn.name}`,
+      description: `${removed[0].title} moved to ${destColumn.name}`,
       time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
-      content: "",
+      content: `${currentUser.name} moved ${removed[0].title} to ${destColumn.name}`,
     };
     setLogData([data, ...logData]);
   };
+
+  const updateCommits = () => {
+    console.log(currentUser);
+    setCurrentUser((prevState) => {
+      return { ...prevState, commits: prevState.commits + 1 };
+    });
+  };
+
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}

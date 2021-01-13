@@ -1,12 +1,36 @@
 const uniqid = require("uniqid");
 
-// Mock User Data
+// Mock User Commits
+export const userCommitCount = [
+  {
+    id: uniqid(),
+    x: "Richard",
+    y: 0,
+  },
+  {
+    id: uniqid(),
+    x: "Sarah",
+    y: 0,
+  },
+  {
+    id: uniqid(),
+    x: "Mitchell",
+    y: 0,
+  },
+  {
+    id: uniqid(),
+    x: "Rick",
+    y: 0,
+  },
+];
 
+// Mock User Data
 export const currentUserData = {
   id: uniqid(),
   name: "Zac Anderson",
   auth: "Admin",
   logins: [],
+  commits: 0,
 };
 // Dashboard List Widget Data
 
@@ -73,6 +97,12 @@ export const dashboardWidgets = [
     id: uniqid(),
     type: "lc",
     title: "Recent Changes",
+    items: listComponentMockArray,
+  },
+  {
+    id: uniqid(),
+    type: "gr",
+    title: "Commits",
     items: listComponentMockArray,
   },
 ];

@@ -11,19 +11,16 @@ import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
 // React Charts
 import { FlexibleXYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
+import { useGlobalContext } from "../../context";
 
 function GraphCard({ cardTitle, content }) {
+  const { commitCount } = useGlobalContext();
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
   const [input, setInput] = useState(cardTitle);
 
-  const data = [
-    { x: "Zac", y: 8 },
-    { x: "Sarah", y: 5 },
-    { x: "Danial", y: 4 },
-    { x: "Mitch", y: 0 },
-  ];
+  const data = commitCount;
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
