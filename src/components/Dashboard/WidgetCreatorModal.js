@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function WidgetCreatorModal({ handleAddWidget }) {
-  const { isDashboardModalOpen, setIsDashboardModalOpen } = useGlobalContext();
+  const { isModalOpen, setIsModalOpen } = useGlobalContext();
   const classes = useStyles();
 
   const [type, setType] = useState("");
@@ -49,15 +49,11 @@ function WidgetCreatorModal({ handleAddWidget }) {
   };
 
   const handleClose = () => {
-    setIsDashboardModalOpen(false);
+    setIsModalOpen(false);
   };
 
   return (
-    <Modal
-      className={classes.modal}
-      open={isDashboardModalOpen}
-      onClose={handleClose}
-    >
+    <Modal className={classes.modal} open={isModalOpen} onClose={handleClose}>
       <div className="modal-container">
         <Paper className={classes.paper}>
           <h3 className="title">Widget Menu</h3>

@@ -14,8 +14,8 @@ function Dashboard() {
   const {
     dbw,
     setDashboardWidgets,
-    isDashboardModalOpen,
-    setIsDashboardModalOpen,
+    isModalOpen,
+    setIsModalOpen,
   } = useGlobalContext();
 
   const handleAddWidget = (type, name) => {
@@ -27,7 +27,7 @@ function Dashboard() {
       items: [],
     };
     setDashboardWidgets([widget, ...dbw]);
-    setIsDashboardModalOpen(true);
+    setIsModalOpen(true);
   };
 
   const createElements = (elem) => {
@@ -60,7 +60,7 @@ function Dashboard() {
           return createElements(elem);
         })}
         {!dbw && <p>No widget data available</p>}
-        {isDashboardModalOpen && (
+        {isModalOpen && (
           <WidgetCreatorModal handleAddWidget={handleAddWidget} />
         )}
       </section>

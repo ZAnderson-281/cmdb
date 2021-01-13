@@ -1,11 +1,17 @@
 import React from "react";
 import { IconButton } from "@material-ui/core";
-import DndTower from "./DndTower";
 import { useGlobalContext } from "../../context";
+import DndTower from "./DndTower";
+import TaskCreatorModal from "./TaskCreator";
 const uniqid = require("uniqid");
 
 function Index() {
-  const { columns, setColumns } = useGlobalContext();
+  const {
+    columns,
+    setColumns,
+    isModalOpen,
+    setIsModalOpen,
+  } = useGlobalContext();
 
   const handleAddWidget = () => {
     const data = {
@@ -27,17 +33,22 @@ function Index() {
     });
   };
 
+  const handleOpenCreateTaskModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div>
       <div className="title">
         <h2>Projects</h2>
-        <IconButton onClick={handleAddWidget}>
+        <IconButton onClick={handleOpenCreateTaskModal}>
           <i className="fas fa-plus"></i>
         </IconButton>
       </div>
       <section className="planning-body">
         <DndTower />
       </section>
+      {isModalOpen && <TaskCreatorModal handleAddWidget={handleAddWidget} />}
     </div>
   );
 }

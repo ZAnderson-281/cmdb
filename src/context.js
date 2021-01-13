@@ -5,7 +5,8 @@ const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
   const [dbw, setDashboardWidgets] = useState(dashboardWidgets);
   const [columns, setColumns] = useState(backend);
-  const [isDashboardModalOpen, setIsDashboardModalOpen] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <AppContext.Provider
@@ -14,8 +15,8 @@ export const AppProvider = ({ children }) => {
         setDashboardWidgets,
         columns,
         setColumns,
-        isDashboardModalOpen,
-        setIsDashboardModalOpen,
+        isModalOpen,
+        setIsModalOpen,
       }}
     >
       {children}
