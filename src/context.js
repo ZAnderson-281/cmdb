@@ -1,77 +1,93 @@
 //  Import general
-import React, { useContext, useState, useEffect } from "react";
-import {
-  dashboardWidgets,
-  backend,
-  currentUserData,
-  userCommitCount,
-} from "./MOCK";
-
+import React, { useContext, useState, useEffect, useReducer } from "react";
+import { backend, currentUserData, userCommitCount } from "./MOCK";
+import reducer from "./reducer";
 // Create global context
 const AppContext = React.createContext();
-const uniqid = require("uniqid");
 
 export const AppProvider = ({ children }) => {
-  const [dbw, setDashboardWidgets] = useState(dashboardWidgets);
-  const [columns, setColumns] = useState(backend);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isUser, setIsUser] = useState(true);
-  const [currentUser, setCurrentUser] = useState(currentUserData);
-  const [logData, setLogData] = useState([]);
-  const [commitCount, setCommitCount] = useState(userCommitCount);
+  // Trial
+
+  const initalState = {
+    pageWidgets: [],
+    cloumns: backend,
+    isModalOpen: false,
+    isUserLoggedIn: true,
+    currentUser: currentUserData,
+    logData: [],
+    commitCount: userCommitCount,
+    isLoading: true,
+  };
+
+  const [state, dispatch] = useReducer(reducer, initalState);
+
+  const url = "http://localhost:5000/";
+
+  // Load Dashboard functionality
+  const loadDashboard = async () => {
+    dispatch({ type: "LOADING" });
+    const response = await fetch(`${url}/Dashboard`);
+    const dashboardWidgets = await response.json();
+    dispatch({ type: "UPDATE_DASHBOARD", payload: dashboardWidgets });
+  };
+
+  useEffect(() => {
+    loadDashboard();
+  }, []);
+
+  // Handle Modal Toggleing
+  const toggleModal = () => {
+    dispatch({ type: "TOGGLE_MODAL" });
+  };
+
+  // const [columns, setColumns] = useState(backend);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isUser, setIsUser] = useState(true);
+  // const [currentUser, setCurrentUser] = useState(currentUserData);
+  // const [logData, setLogData] = useState([]);
+  // const [commitCount, setCommitCount] = useState(userCommitCount);
 
   //  Update recent changes
-  useEffect(() => {
-    setDashboardWidgets((data) => {
-      return data.map((element) => {
-        if (element.title === "Recent Changes") {
-          return { ...element, items: logData };
-        } else {
-          return { ...element };
-        }
-      });
-    });
-  }, [logData]);
+  // useEffect(() => {
+  //   // setDashboardWidgets((data) => {
+  //   //   return data.map((element) => {
+  //   //     if (element.title === "Recent Changes") {
+  //   //       return { ...element, items: logData };
+  //   //     } else {
+  //   //       return { ...element };
+  //   //     }
+  //   //   });
+  //   // });
+  // }, [logData]);
 
   //  Update task completion
-  useEffect(() => {
-    setCommitCount((prevState) => {
-      return prevState.map((elem, index) => {
-        if (elem.x === currentUser.name) {
-          return { ...elem, y: currentUser.commits };
-        }
-        if (prevState.length === index + 1) {
-          setCommitCount([
-            ...prevState,
-            {
-              id: uniqid(),
-              x: currentUser.name,
-              y: currentUser.commits,
-            },
-          ]);
-        }
-        return { ...elem };
-      });
-    });
-  }, [currentUser]);
+  // useEffect(() => {
+  //   setCommitCount((prevState) => {
+  //     return prevState.map((elem, index) => {
+  //       if (elem.x === currentUser.name) {
+  //         return { ...elem, y: currentUser.commits };
+  //       }
+  //       if (prevState.length === index + 1) {
+  //         setCommitCount([
+  //           ...prevState,
+  //           {
+  //             id: uniqid(),
+  //             x: currentUser.name,
+  //             y: currentUser.commits,
+  //           },
+  //         ]);
+  //       }
+  //       return { ...elem };
+  //     });
+  //   });
+  // }, [currentUser]);
 
   return (
     <AppContext.Provider
       value={{
-        dbw,
-        setDashboardWidgets,
-        columns,
-        setColumns,
-        isModalOpen,
-        setIsModalOpen,
-        isUser,
-        setIsUser,
-        currentUser,
-        setCurrentUser,
-        logData,
-        setLogData,
-        commitCount,
-        setCommitCount,
+        ...state,
+        loadDashboard,
+        toggleModal,
       }}
     >
       {children}

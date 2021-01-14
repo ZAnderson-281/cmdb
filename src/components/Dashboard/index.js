@@ -1,7 +1,6 @@
 // Import general items and hooks
 import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../../context";
-import { useFetch } from "../../customHooks/useFetch";
 
 // Import components
 import GeneralCard from "../Cards/GeneralCard";
@@ -11,25 +10,30 @@ import DeadlineCard from "../Cards/DeadlineCard";
 import WidgetCreatorModal from "./WidgetCreatorModal";
 import { IconButton } from "@material-ui/core";
 
-const uniqid = require("uniqid");
-
 function Dashboard() {
+  const {
+    isLoading,
+    isModalOpen,
+    toggleModal,
+    pageWidgets,
+  } = useGlobalContext();
   // Import important context variables
 
   // create state for the dashboard
-  const [dashboardWidgets, setDashboardWidgets] = useState([]);
-  const [isLoading, data] = useFetch("http://localhost:5000/Dashboard");
+  // const [dashboardWidgets, setDashboardWidgets] = useState([]);
+  // const [isLoading, data] = useFetch("http://localhost:5000/Dashboard");
+  // const [reloadDashboard, setReloadDashboard] = useState(false);
+  // const { isModalOpen, setIsModalOpen } = useGlobalContext();
 
   // When the dashboard widgets are fully fetched display the content
-  useEffect(() => {
-    setDashboardWidgets(data);
-  }, [isLoading]);
+  // useEffect(() => {
+  //   setDashboardWidgets(data);
+  // }, [isLoading]);
 
   // Toggle the modal for creating new widgets
-  const { isModalOpen, setIsModalOpen } = useGlobalContext();
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
   // Function that is prop drilled into the widget creator component, this creates a widget with the chosen params
 
@@ -38,15 +42,15 @@ function Dashboard() {
    * COME BACK HERE TO COMPLETE FUNCTIONALITY
    *
    */
-  const handleAddWidget = (type, name) => {
-    const widget = {
-      id: uniqid(),
-      type: type,
-      title: name,
-      items: [],
-    };
-    setDashboardWidgets([widget, ...dashboardWidgets.dashboard]);
-  };
+  // const handleAddWidget = (type, name) => {
+  //   const widget = {
+  //     id: uniqid(),
+  //     type: type,
+  //     title: name,
+  //     items: [],
+  //   };
+  //   setDashboardWidgets([widget, ...dashboardWidgets.dashboard]);
+  // };
 
   // Return the correct widget based on widget array
   // NOTE: Each card passes its dataID so it can fetch its own data
@@ -94,7 +98,7 @@ function Dashboard() {
       {/* Head */}
       <div className="title">
         <h2>Dashboard</h2>
-        <IconButton onClick={handleOpenModal}>
+        <IconButton onClick={toggleModal}>
           <i className="fas fa-plus"></i>
         </IconButton>
       </div>
@@ -102,20 +106,16 @@ function Dashboard() {
       {/* Body */}
       <section className="dashboard-body">
         {/* If the data has not been fetched yet display a loading spinner */}
-        {dashboardWidgets.length !== 0 ? (
-          // Map over the returned object and create the correct elements
-          dashboardWidgets.dashboard.map((elem) => {
-            console.log(elem);
+        {isLoading ? (
+          <h1>LOADING</h1>
+        ) : (
+          pageWidgets.dashboard.map((elem) => {
             return createElements(elem);
           })
-        ) : (
-          <h1>Spinnnneeerrr</h1>
         )}
 
-        {/* Display modal if modal has been toggled ( Context State) */}
-        {isModalOpen && (
-          <WidgetCreatorModal handleAddWidget={handleAddWidget} />
-        )}
+        {/* Display modal if modal has been toggled (State) */}
+        {isModalOpen && <WidgetCreatorModal />}
       </section>
     </div>
   );
