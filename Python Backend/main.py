@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Api
 from flask_cors import CORS, cross_origin
+
+import uuid
 
 app = Flask(__name__)
 api = Api(app)
@@ -66,9 +68,30 @@ dashboard = [
 # Dashboard Routing
 
 
-@app.route('/Dashboard', methods=['GET'])
+@app.route('/Dashboard', methods=['GET', 'POST'])
 def getAllDashboard():
-    return {"dashboard": dashboard}
+
+    # GET request
+    if request.method == 'GET':
+        return {"dashboard": dashboard}
+    if request.method == 'POST':
+        posted_data = request.get_json()
+
+        # Edge cases to make sure request is proper
+        if len(posted_data) != 2:
+            return {"message": "Invalid request"}
+        if 'type' not in posted_data:
+            return {"message": "Missing required parameter type"}
+        if 'title' not in posted_data:
+            return {"message": "Missing required parameter title"}
+
+        # ADD CHECK FOR CARD TYPES HERE IN THE FUTURE
+
+        posted_data['id'] = uuid.uuid4().hex
+        posted_data['data_id'] = uuid.uuid4().hex
+
+        dashboard.append(posted_data)
+        return "posted"
 
 
 @app.route('/Dashboard/<int:widget_id>', methods=['GET'])
