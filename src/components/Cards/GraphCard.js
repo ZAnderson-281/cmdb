@@ -13,7 +13,7 @@ import { CustomInput } from "./CustomInput";
 import { FlexibleXYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
 import { useGlobalContext } from "../../context";
 
-function GraphCard({ cardTitle, content }) {
+function GraphCard({ cardTitle, dataId }) {
   const { commitCount } = useGlobalContext();
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
@@ -43,7 +43,7 @@ function GraphCard({ cardTitle, content }) {
   return (
     <>
       <Card className="card">
-        <Collapse in={modalIsShowing}>
+        <Collapse in={modalIsShowing} unmountOnExit>
           <CardContent className="card-settings">
             <h4>Background Color:</h4>
             <div className="picker">

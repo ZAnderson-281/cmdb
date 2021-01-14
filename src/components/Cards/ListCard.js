@@ -11,12 +11,16 @@ import {
 import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
 import ListCardItem from "./ListCardItem";
+import { useFetch } from "../../customHooks/useFetch";
 
-function GeneralCard({ cardTitle, items }) {
+function GeneralCard({ cardTitle, dataId }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
   const [input, setInput] = useState(cardTitle);
+  const [isLoading, data] = useFetch(
+    `http://localhost:5000/Dashboard/Data/${dataId}`
+  );
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
@@ -39,7 +43,7 @@ function GeneralCard({ cardTitle, items }) {
   return (
     <>
       <Card className="card">
-        <Collapse in={modalIsShowing}>
+        <Collapse in={modalIsShowing} unmountOnExit>
           <CardContent className="card-settings">
             <h4>Background Color:</h4>
             <div className="picker">
@@ -73,9 +77,13 @@ function GeneralCard({ cardTitle, items }) {
         />
 
         <CardContent className="card-body">
-          {/* {items.map((elem) => {
-            return <ListCardItem key={elem.id} {...elem} />;
-          })} */}
+          {!isLoading ? (
+            data.card_data.map((elem) => {
+              return <ListCardItem key={elem.id} {...elem} />;
+            })
+          ) : (
+            <p>LOADING</p>
+          )}
         </CardContent>
       </Card>
     </>

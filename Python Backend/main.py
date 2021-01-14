@@ -10,9 +10,36 @@ CORS(app)
 # Dashboard Data
 
 dashboardData = {
-    '1a': [1, 2, 3, 4, 5],
-    '1b': [5, 2, 543, 231, 3],
-    '1c': [2, 234234, 23, 5432, 4343]
+    '1a': [{
+        "id": "1",
+        'name': "Zac",
+        'description': "Testing",
+        'time': "Tests",
+        'content': 'test'
+    },
+        {
+        "id": "2",
+        'name': "Sam",
+        'description': "Testing",
+        'time': "Tests",
+        'content': 'test'
+    }, {
+        "id": "3",
+        'name': "Sarah",
+        'description': "Testing",
+        'time': "Tests",
+        'content': 'test'
+    }],
+    '1b': [
+        {
+            "id": "3",
+            'name': "Sarah",
+            'description': "Testing",
+            'time': "Tests",
+            'content': 'test'
+        }
+    ],
+    '1c': []
 }
 
 dashboard = [
@@ -52,7 +79,7 @@ def getSpecificDashboardWidget(widget_id):
 
 @app.route('/Dashboard/Data/<string:data_id>', methods=['GET'])
 def getSpecificDashboardData(data_id):
-    return {'res': dashboardData[data_id]}
+    return {'card_data': dashboardData[data_id]}
 
 
 # Project KANBAN Data

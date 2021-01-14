@@ -1,3 +1,4 @@
+//  Import general
 import React, { useContext, useState, useEffect } from "react";
 import {
   dashboardWidgets,
@@ -6,6 +7,7 @@ import {
   userCommitCount,
 } from "./MOCK";
 
+// Create global context
 const AppContext = React.createContext();
 const uniqid = require("uniqid");
 

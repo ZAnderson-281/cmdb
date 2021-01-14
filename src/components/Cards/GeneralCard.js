@@ -37,7 +37,7 @@ function GeneralCard({ cardTitle, content }) {
   return (
     <>
       <Card className="card">
-        <Collapse in={modalIsShowing}>
+        <Collapse in={modalIsShowing} unmountOnExit>
           <CardContent className="card-settings">
             <h4>Background Color:</h4>
             <div className="picker">

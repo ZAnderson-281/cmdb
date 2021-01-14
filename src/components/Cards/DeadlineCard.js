@@ -25,7 +25,7 @@ function DeadlineCard() {
           </IconButton>
         }
       />
-      <Collapse in={toggle} disableStrictModeCompat>
+      <Collapse in={toggle} disableStrictModeCompat unmountOnExit>
         <CardContent>
           <p>Content</p>
         </CardContent>
