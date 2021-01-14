@@ -5,6 +5,7 @@ import {
   currentUserData,
   userCommitCount,
 } from "./MOCK";
+
 const AppContext = React.createContext();
 const uniqid = require("uniqid");
 
@@ -13,7 +14,6 @@ export const AppProvider = ({ children }) => {
   const [columns, setColumns] = useState(backend);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUser, setIsUser] = useState(true);
-
   const [currentUser, setCurrentUser] = useState(currentUserData);
   const [logData, setLogData] = useState([]);
   const [commitCount, setCommitCount] = useState(userCommitCount);
