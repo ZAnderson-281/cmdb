@@ -55,7 +55,30 @@ def getSpecificDashboardData(data_id):
 
 # Project KANBAN Data
 projectData = {
-    '2a': [1, 2, 3, 4, 5],
+    '2a': [
+        {
+            'name': "Todo",
+            'items': [
+                {"id": 1, "title": "test1", "content": "One"},
+                {"id": 2, "title": "test2", "content": "Two"},
+                {"id": 3, "title": "test3", "content": "Three"}
+            ]
+        },
+        {
+            'name': "In Progress",
+            'items': [
+                {"id": 1, "title": "test1", "content": "One"},
+                {"id": 2, "title": "test2", "content": "Two"},
+            ]
+        },
+        {
+            'name': "Completed",
+            'items': [
+                {"id": 1, "title": "test1", "content": "One"},
+                {"id": 2, "title": "test2", "content": "Two"},
+            ]
+        },
+    ],
     '2b': [5, 2, 543, 231, 3],
     '2c': [2, 234234, 23, 5432, 4343]
 }
@@ -74,7 +97,7 @@ projects = [
 
 ]
 
-# Project KANBAN Routing
+# Projects Routing
 
 
 @app.route('/Projects', methods=['GET'])
@@ -86,6 +109,11 @@ def getAllProjects():
 def getSpecificProject(project_id):
     x = next((item for item in projects if item['id'] == project_id))
     return {"project": x}
+
+
+@app.route('/Projects/Data/<string:data_id>', methods=['GET'])
+def getSpecificProjectData(data_id):
+    return {"data": projectData[data_id]}
 
 
 if __name__ == '__main__':
