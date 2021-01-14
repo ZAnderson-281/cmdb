@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export const useFetch = (url, params = {}) => {
   // Initalize state
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   // Create function to gather data
@@ -12,7 +12,7 @@ export const useFetch = (url, params = {}) => {
 
     // Reset states
     setData(fetchedData);
-    setLoading(false);
+    setIsLoading(false);
   };
 
   // Call the function on mount
@@ -21,5 +21,5 @@ export const useFetch = (url, params = {}) => {
   }, [url]);
 
   // Return states
-  return { loading, data };
+  return [isLoading, data];
 };

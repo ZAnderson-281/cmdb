@@ -73,9 +73,9 @@ function GeneralCard({ cardTitle, items }) {
         />
 
         <CardContent className="card-body">
-          {items.map((elem) => {
+          {/* {items.map((elem) => {
             return <ListCardItem key={elem.id} {...elem} />;
-          })}
+          })} */}
         </CardContent>
       </Card>
     </>
