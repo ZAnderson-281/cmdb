@@ -5,29 +5,29 @@ export const userCommitCount = [
   {
     id: uniqid(),
     x: "Richard",
-    y: 0,
+    y: 14,
   },
   {
     id: uniqid(),
     x: "Sarah",
-    y: 0,
+    y: 12,
   },
   {
     id: uniqid(),
     x: "Mitchell",
-    y: 0,
+    y: 9,
   },
   {
     id: uniqid(),
     x: "Rick",
-    y: 0,
+    y: 8,
   },
 ];
 
 // Mock User Data
 export const currentUserData = {
   id: uniqid(),
-  name: "Zac Anderson",
+  name: "Zac",
   auth: "Admin",
   logins: [],
   commits: 0,
