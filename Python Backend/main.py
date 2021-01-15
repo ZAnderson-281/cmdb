@@ -122,7 +122,7 @@ def getSpecificDashboardWidget(widget_id):
             # Get the index for the widget and delete it from the list
             i = dashboard.index(widget)
             dashboard.pop(i)
-            return jsonify(widget)
+            return jsonify(dashboard)
         except StopIteration:
             return jsonify({"message": "id does not exist"})
 

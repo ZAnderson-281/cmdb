@@ -1,6 +1,11 @@
 //  Import general
 import React, { useContext, useState, useEffect, useReducer } from "react";
-import { backend, currentUserData, userCommitCount } from "./MOCK";
+import {
+  backend,
+  currentUserData,
+  dashboardWidgets,
+  userCommitCount,
+} from "./MOCK";
 import reducer from "./reducer";
 // Create global context
 const AppContext = React.createContext();
@@ -60,6 +65,27 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // Delete dashboard widget
+  const deleteWidget = async (id) => {
+    try {
+      const response = await fetch(`${url}/Dashboard/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const dashboardWidgets = await response.json();
+
+      dispatch({
+        type: "DELETE_DASHBOARD_WIDGET",
+        payload: dashboardWidgets,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // Handle Modal Toggleing
   const toggleModal = () => {
     dispatch({ type: "TOGGLE_MODAL" });
@@ -72,6 +98,7 @@ export const AppProvider = ({ children }) => {
         loadDashboard,
         toggleModal,
         newWidgetCreation,
+        deleteWidget,
       }}
     >
       {children}

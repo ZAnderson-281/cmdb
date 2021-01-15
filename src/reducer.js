@@ -16,6 +16,14 @@ const reducer = (state, action) => {
           dashboard: [action.payload, ...state.pageWidgets.dashboard],
         },
       };
+    case "DELETE_DASHBOARD_WIDGET":
+      return {
+        ...state,
+        pageWidgets: {
+          ...state.pageWidgets,
+          dashboard: action.payload,
+        },
+      };
   }
 
   return state;

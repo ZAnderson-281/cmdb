@@ -12,8 +12,9 @@ import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
 import ListCardItem from "./ListCardItem";
 import { useFetch } from "../../customHooks/useFetch";
+import { useGlobalContext } from "../../context";
 
-function GeneralCard({ cardTitle, dataId }) {
+function GeneralCard({ cardTitle, dataId, cardId }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
@@ -21,6 +22,7 @@ function GeneralCard({ cardTitle, dataId }) {
   const [isLoading, data] = useFetch(
     `http://localhost:5000/Dashboard/Data/${dataId}`
   );
+  const { deleteWidget } = useGlobalContext();
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
@@ -39,6 +41,9 @@ function GeneralCard({ cardTitle, dataId }) {
     console.log(e.target.value);
     setInput(e.target.value);
   };
+  const handleDeleteWidget = () => {
+    deleteWidget(cardId);
+  };
 
   return (
     <>
@@ -54,6 +59,7 @@ function GeneralCard({ cardTitle, dataId }) {
               <CirclePicker onChangeComplete={handleTextChangeColor} />
             </div>
             <Button onClick={resetColors}>Reset</Button>
+            <Button onClick={handleDeleteWidget}>DELETE</Button>
           </CardContent>
         </Collapse>
 

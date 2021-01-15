@@ -29,6 +29,7 @@ function Dashboard() {
           key={elem.id}
           cardTitle={elem.title}
           dataId={elem.data_id}
+          cardId={elem.id}
         />
       );
     }
@@ -36,14 +37,24 @@ function Dashboard() {
     // List Card
     if (elem.type === "lc") {
       return (
-        <ListCard key={elem.id} cardTitle={elem.title} dataId={elem.data_id} />
+        <ListCard
+          key={elem.id}
+          cardTitle={elem.title}
+          dataId={elem.data_id}
+          cardId={elem.id}
+        />
       );
     }
 
     // Graph Card
     if (elem.type === "gr") {
       return (
-        <GraphCard key={elem.id} cardTitle={elem.title} dataId={elem.data_id} />
+        <GraphCard
+          key={elem.id}
+          cardTitle={elem.title}
+          dataId={elem.data_id}
+          cardId={elem.id}
+        />
       );
     }
 
@@ -54,6 +65,7 @@ function Dashboard() {
           key={elem.id}
           cardTitle={elem.title}
           dataId={elem.data_id}
+          cardId={elem.id}
         />
       );
     }

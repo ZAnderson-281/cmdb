@@ -9,12 +9,15 @@ import {
 } from "@material-ui/core";
 import { CirclePicker } from "react-color";
 import { CustomInput } from "./CustomInput";
+import { useGlobalContext } from "../../context";
 
-function GeneralCard({ cardTitle, content }) {
+function GeneralCard({ cardTitle, content, cardId }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
   const [textColor, setTextColor] = useState("#222");
   const [input, setInput] = useState(cardTitle);
+
+  const { deleteWidget } = useGlobalContext();
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
@@ -34,6 +37,10 @@ function GeneralCard({ cardTitle, content }) {
     setInput(e.target.value);
   };
 
+  const handleDeleteWidget = () => {
+    deleteWidget(cardId);
+  };
+
   return (
     <>
       <Card className="card">
@@ -48,6 +55,7 @@ function GeneralCard({ cardTitle, content }) {
               <CirclePicker onChangeComplete={handleTextChangeColor} />
             </div>
             <Button onClick={resetColors}>Reset</Button>
+            <Button onClick={handleDeleteWidget}>DELETE</Button>
           </CardContent>
         </Collapse>
 

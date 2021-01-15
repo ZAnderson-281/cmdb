@@ -13,7 +13,7 @@ import { CustomInput } from "./CustomInput";
 import { FlexibleXYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
 import { useGlobalContext } from "../../context";
 
-function GraphCard({ cardTitle, dataId }) {
+function GraphCard({ cardTitle, dataId, cardId }) {
   const { commitCount } = useGlobalContext();
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [color, setColor] = useState("#eaeaea");
@@ -21,6 +21,7 @@ function GraphCard({ cardTitle, dataId }) {
   const [input, setInput] = useState(cardTitle);
 
   const data = commitCount;
+  const { deleteWidget } = useGlobalContext();
 
   const toggleModal = (e) => {
     setModalIsShowing(!modalIsShowing);
@@ -39,6 +40,9 @@ function GraphCard({ cardTitle, dataId }) {
     console.log(e.target.value);
     setInput(e.target.value);
   };
+  const handleDeleteWidget = () => {
+    deleteWidget(cardId);
+  };
 
   return (
     <>
@@ -54,6 +58,7 @@ function GraphCard({ cardTitle, dataId }) {
               <CirclePicker onChangeComplete={handleTextChangeColor} />
             </div>
             <Button onClick={resetColors}>Reset</Button>
+            <Button onClick={handleDeleteWidget}>DELETE</Button>
           </CardContent>
         </Collapse>
 
