@@ -46,19 +46,19 @@ dashboardData = {
 
 dashboard = [
     {
-        'id': 1,
+        'id': '1',
         'type': "lc",
         'title': "Log Ins",
         'data_id': '1a',
     },
     {
-        'id': 2,
+        'id': '2',
         'type': "lc",
         'title': "Recent Changes",
         'data_id': '1b',
     },
     {
-        'id': 3,
+        'id': '3',
         'type': "gr",
         'title': "Commits",
         'data_id': '1c',
@@ -71,9 +71,11 @@ dashboard = [
 @app.route('/Dashboard', methods=['GET', 'POST'])
 def getAllDashboard():
 
-    # GET request
+    # GET Request
     if request.method == 'GET':
         return {"dashboard": dashboard}
+
+    # POST Request
     if request.method == 'POST':
         posted_data = request.get_json()
 
@@ -85,7 +87,7 @@ def getAllDashboard():
         if 'title' not in posted_data:
             return {"message": "Missing required parameter title"}
 
-        # ADD CHECK FOR CARD TYPES HERE IN THE FUTURE
+        ### NOTE: ADD CHECK FOR CARD TYPES HERE IN THE FUTURE ###
 
         posted_data['id'] = uuid.uuid4().hex
         posted_data['data_id'] = uuid.uuid4().hex
@@ -93,13 +95,36 @@ def getAllDashboard():
         dashboard.append(posted_data)
         dashboardData[posted_data['data_id']] = []
 
+        # Return json for dashboarc element creation
         return jsonify(posted_data)
 
 
-@app.route('/Dashboard/<int:widget_id>', methods=['GET'])
+@app.route('/Dashboard/<string:widget_id>', methods=['GET', 'DELETE'])
 def getSpecificDashboardWidget(widget_id):
-    widget = next((item for item in dashboard if item['id'] == widget_id))
-    return {"widget": widget}
+
+    # GET Request
+    if request.method == 'GET':
+        try:
+            # Search each item in list for matchng id and return first matching
+            widget = next(
+                (item for item in dashboard if item['id'] == widget_id))
+            return jsonify(widget)
+
+        except StopIteration:
+            return jsonify({"message": "id does not exist"})
+
+    # DELETE Request
+    if request.method == 'DELETE':
+        try:
+            # Search each item in list for matchng id and return first matching
+            widget = next(
+                (item for item in dashboard if item['id'] == widget_id))
+            # Get the index for the widget and delete it from the list
+            i = dashboard.index(widget)
+            dashboard.pop(i)
+            return jsonify(widget)
+        except StopIteration:
+            return jsonify({"message": "id does not exist"})
 
 
 @app.route('/Dashboard/Data/<string:data_id>', methods=['GET'])
