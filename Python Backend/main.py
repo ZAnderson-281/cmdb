@@ -113,6 +113,10 @@ def getAllDashboard():
 
         posted_data['id'] = uuid.uuid4().hex
         posted_data['data_id'] = uuid.uuid4().hex
+        posted_data['cardSettings'] = {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
 
         dashboard.append(posted_data)
         dashboardData[posted_data['data_id']] = []
@@ -217,8 +221,8 @@ def getAllProjects():
 
 @app.route('/Projects/<int:project_id>', methods=['GET'])
 def getSpecificProject(project_id):
-    x = next((item for item in projects if item['id'] == project_id))
-    return {"project": x}
+    project = next((item for item in projects if item['id'] == project_id))
+    return {"project": project}
 
 
 @app.route('/Projects/Data/<string:data_id>', methods=['GET'])

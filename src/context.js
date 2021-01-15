@@ -1,11 +1,6 @@
 //  Import general
 import React, { useContext, useEffect, useReducer } from "react";
-import {
-  backend,
-  currentUserData,
-  dashboardWidgets,
-  userCommitCount,
-} from "./MOCK";
+import { backend, currentUserData, userCommitCount } from "./MOCK";
 import reducer from "./reducer";
 // Create global context
 const AppContext = React.createContext();
@@ -15,7 +10,7 @@ export const AppProvider = ({ children }) => {
 
   const initalState = {
     pageWidgets: [],
-    cloumns: backend,
+    columns: backend,
     isModalOpen: false,
     isUserLoggedIn: true,
     currentUser: currentUserData,
@@ -26,7 +21,7 @@ export const AppProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, initalState);
 
-  const url = "http://localhost:5000/";
+  const url = "http://localhost:5000";
 
   // Load Dashboard functionality
   const loadDashboard = async () => {
@@ -35,6 +30,8 @@ export const AppProvider = ({ children }) => {
     const dashboardWidgets = await response.json();
     dispatch({ type: "UPDATE_DASHBOARD", payload: dashboardWidgets });
   };
+
+  const loadProjectData = async () => {};
 
   useEffect(() => {
     loadDashboard();
@@ -90,6 +87,15 @@ export const AppProvider = ({ children }) => {
     console.log("Update Card Settings");
   };
 
+  // Handle drag and drop from project kanban
+  const updateProjectColumnData = (newColumns) => {
+    console.log(newColumns);
+    dispatch({
+      type: "UPDATE_PROJECT_COLUMNS",
+      payload: newColumns,
+    });
+  };
+
   // Handle Modal Toggleing
   const toggleModal = () => {
     dispatch({ type: "TOGGLE_MODAL" });
@@ -104,6 +110,7 @@ export const AppProvider = ({ children }) => {
         newWidgetCreation,
         deleteWidget,
         updateCardSettings,
+        updateProjectColumnData,
       }}
     >
       {children}

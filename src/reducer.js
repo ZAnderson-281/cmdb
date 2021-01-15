@@ -24,6 +24,12 @@ const reducer = (state, action) => {
           dashboard: action.payload,
         },
       };
+    case "UPDATE_PROJECT_COLUMNS":
+      return {
+        ...state,
+        columns: action.payload,
+      };
+
     default:
       console.log("DEFAULT CASE");
       return state;

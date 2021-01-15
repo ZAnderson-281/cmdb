@@ -2,148 +2,104 @@ import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import GeneralCard from "../Cards/GeneralCard/";
 import { useGlobalContext } from "../../context";
-const uniqid = require("uniqid");
 
 const Index = () => {
-  const {
-    columns,
-    setColumns,
-    isUser,
-    currentUser,
-    setCurrentUser,
-    logData,
-    setLogData,
-  } = useGlobalContext();
+  const { columns, updateProjectColumnData } = useGlobalContext();
 
-  // After drag completed and mouse/key is up
-  const onDragEnd = (result, columns, setColumns) => {
-    if (isUser) {
-      //If end position is not a droppable position do nothing
-      if (!result.destination) {
-        return;
-      }
-      // Get start and end position
-      const { source, destination } = result;
+  const handleDragEnd = (result) => {
+    let newColumns = {};
 
-      // If its not the same container at drag end
-      if (source.droppableId !== destination.droppableId) {
-        // Set vars for start and end columns and their items
-        const sourceColumn = columns[source.droppableId];
-        const destColumn = columns[destination.droppableId];
-        const sourceItems = [...sourceColumn.items];
-        const destItems = [...destColumn.items];
+    if (!result.destination) return;
+    const { source, destination } = result;
 
-        // Remove from source list and add to destination list
-        const [removed] = sourceItems.splice(source.index, 1);
-        destItems.splice(destination.index, 0, removed);
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
 
-        // Update state
-        setColumns({
-          ...columns,
-          [source.droppableId]: {
-            ...sourceColumn,
-            items: sourceItems,
-          },
-          [destination.droppableId]: {
-            ...destColumn,
-            items: destItems,
-          },
-        });
-        updateLog(sourceColumn, destColumn, sourceItems, destItems, [removed]);
-        if (destColumn.name === "Done") {
-          updateCommits();
-        }
-      } else {
-        const column = columns[source.droppableId];
-        const coppiedItems = [...column.items];
-        const [removed] = coppiedItems.splice(source.index, 1);
-        coppiedItems.splice(destination.index, 0, removed);
-        setColumns({
-          ...columns,
-          [source.droppableId]: {
-            ...column,
-            items: coppiedItems,
-          },
-        });
-      }
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+
+      newColumns = {
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems,
+        },
+      };
     } else {
-      alert("INVALID PERMISSIONS");
-      return;
+      const column = columns[source.droppableId];
+      const copiedColumnItems = [...column.items];
+      const [removed] = copiedColumnItems.splice(source.index, 1);
+      copiedColumnItems.splice(destination.index, 0, removed);
+
+      newColumns = {
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedColumnItems,
+        },
+      };
     }
-  };
-
-  const updateLog = (
-    sourceColumn,
-    destColumn,
-    sourceItems,
-    destItems,
-    removed
-  ) => {
-    const data = {
-      id: uniqid(),
-      name: `${currentUser.name}`,
-      description: `${removed[0].title} moved to ${destColumn.name}`,
-      time: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
-      content: `${currentUser.name} moved ${removed[0].title} to ${destColumn.name}`,
-    };
-    setLogData([data, ...logData]);
-  };
-
-  const updateCommits = () => {
-    console.log(currentUser);
-    setCurrentUser((prevState) => {
-      return { ...prevState, commits: prevState.commits + 1 };
-    });
+    updateProjectColumnData(newColumns);
   };
 
   return (
-    <DragDropContext
-      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-    >
-      {Object.entries(columns).map(([id, column]) => {
-        return (
-          <Droppable droppableId={id} key={id}>
-            {(provided, snapshot) => {
-              return (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={{
-                    background: snapshot.isDraggingOver ? "lightblue" : "none",
-                  }}
-                >
-                  {column.items.map((item, index) => {
-                    return (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => {
-                          return (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <GeneralCard
-                                cardTitle={item.title}
-                                content={item.content}
-                              ></GeneralCard>
-                            </div>
-                          );
-                        }}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              );
-            }}
-          </Droppable>
-        );
-      })}
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        {Object.entries(columns).map(([id, column]) => {
+          return (
+            <div key={id}>
+              <h2>{column.name}</h2>
+              <Droppable droppableId={id}>
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      style={{
+                        background: snapshot.isDraggingOver
+                          ? "lightblue"
+                          : "#fff",
+                      }}
+                    >
+                      {column.items.map((item, index) => {
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <h1>{item.content}</h1>
+                                </div>
+                              );
+                            }}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  );
+                }}
+              </Droppable>
+            </div>
+          );
+        })}
+      </DragDropContext>
+    </>
   );
 };
 export default Index;
