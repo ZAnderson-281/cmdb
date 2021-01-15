@@ -24,9 +24,10 @@ const reducer = (state, action) => {
           dashboard: action.payload,
         },
       };
+    default:
+      console.log("DEFAULT CASE");
+      return state;
   }
-
-  return state;
 };
 
 export default reducer;

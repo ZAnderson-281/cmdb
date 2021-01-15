@@ -1,5 +1,5 @@
 //  Import general
-import React, { useContext, useState, useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import {
   backend,
   currentUserData,
@@ -86,6 +86,10 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const updateCardSettings = (cardSettings) => {
+    console.log("Update Card Settings");
+  };
+
   // Handle Modal Toggleing
   const toggleModal = () => {
     dispatch({ type: "TOGGLE_MODAL" });
@@ -99,6 +103,7 @@ export const AppProvider = ({ children }) => {
         toggleModal,
         newWidgetCreation,
         deleteWidget,
+        updateCardSettings,
       }}
     >
       {children}

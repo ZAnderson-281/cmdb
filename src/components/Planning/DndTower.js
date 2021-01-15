@@ -1,6 +1,6 @@
 import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import GeneralCard from "../Cards/GeneralCard";
+import GeneralCard from "../Cards/GeneralCard/";
 import { useGlobalContext } from "../../context";
 const uniqid = require("uniqid");
 

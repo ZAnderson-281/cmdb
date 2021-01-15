@@ -3,10 +3,10 @@ import React from "react";
 import { useGlobalContext } from "../../context";
 
 // Import components
-import GeneralCard from "../Cards/GeneralCard";
-import ListCard from "../Cards/ListCard";
-import GraphCard from "../Cards/GraphCard";
-import DeadlineCard from "../Cards/DeadlineCard";
+import GeneralCard from "../Cards/GeneralCard/";
+import ListCard from "../Cards/ListCard/";
+import GraphCard from "../Cards/GraphCard/";
+import DeadlineCard from "../Cards/DeadlineCard/";
 import WidgetCreatorModal from "./WidgetCreatorModal";
 import { IconButton } from "@material-ui/core";
 
@@ -30,6 +30,7 @@ function Dashboard() {
           cardTitle={elem.title}
           dataId={elem.data_id}
           cardId={elem.id}
+          cardSettings={elem.cardSettings}
         />
       );
     }
@@ -42,6 +43,7 @@ function Dashboard() {
           cardTitle={elem.title}
           dataId={elem.data_id}
           cardId={elem.id}
+          cardSettings={elem.cardSettings}
         />
       );
     }
@@ -54,6 +56,7 @@ function Dashboard() {
           cardTitle={elem.title}
           dataId={elem.data_id}
           cardId={elem.id}
+          cardSettings={elem.cardSettings}
         />
       );
     }
@@ -66,6 +69,7 @@ function Dashboard() {
           cardTitle={elem.title}
           dataId={elem.data_id}
           cardId={elem.id}
+          cardSettings={elem.cardSettings}
         />
       );
     }

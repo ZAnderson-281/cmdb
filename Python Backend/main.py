@@ -47,21 +47,43 @@ dashboardData = {
 dashboard = [
     {
         'id': '1',
-        'type': "lc",
-        'title': "Log Ins",
+        'type': "gc",
+        'title': "General Card",
         'data_id': '1a',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
     },
     {
         'id': '2',
         'type': "lc",
-        'title': "Recent Changes",
+        'title': "List Card",
         'data_id': '1b',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
     },
     {
         'id': '3',
         'type': "gr",
-        'title': "Commits",
+        'title': "Graph Card",
         'data_id': '1c',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
+    },
+    {
+        'id': '4',
+        'type': "dc",
+        'title': "Deadline Card",
+        'data_id': '1c',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
     },
 ]
 
