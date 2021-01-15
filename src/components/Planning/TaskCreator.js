@@ -32,16 +32,14 @@ const useStyles = makeStyles((theme) => ({
 function TaskCreatorModal({ handleAddWidget }) {
   const classes = useStyles();
 
-  const { setIsModalOpen, isModalOpen } = useGlobalContext();
+  const { toggleModal, isModalOpen, addProjectTaskCard } = useGlobalContext();
 
+  // Personal State
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [priority, setPriority] = useState("");
 
   //   Handle Events
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
   const handleCardNameChange = (e) => {
     setName(e.target.value);
   };
@@ -52,11 +50,15 @@ function TaskCreatorModal({ handleAddWidget }) {
     setContent(e.target.value);
   };
   const handleFormSubmit = (e) => {
-    handleAddWidget(name, content);
+    const card = {
+      name,
+      content,
+    };
+    addProjectTaskCard(card);
   };
 
   return (
-    <Modal className={classes.modal} open={isModalOpen} onClose={handleClose}>
+    <Modal className={classes.modal} open={isModalOpen} onClose={toggleModal}>
       <div className="modal-container">
         <Paper className={classes.paper}>
           <h3 className="title">Widget Menu</h3>

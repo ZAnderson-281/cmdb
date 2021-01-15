@@ -38,7 +38,7 @@ function CardSettings({ cardId, modalIsShowing, cardSettings }) {
 
   return (
     <>
-      <Collapse in={modalIsShowing} unmountOnExit>
+      <Collapse in={modalIsShowing} unmountOnExit disableStrictModeCompat>
         <CardContent className="card-settings">
           <h4>Background Color:</h4>
           <div className="picker">

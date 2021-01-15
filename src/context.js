@@ -89,11 +89,14 @@ export const AppProvider = ({ children }) => {
 
   // Handle drag and drop from project kanban
   const updateProjectColumnData = (newColumns) => {
-    console.log(newColumns);
     dispatch({
       type: "UPDATE_PROJECT_COLUMNS",
       payload: newColumns,
     });
+  };
+
+  const addProjectTaskCard = (projectTaskCard) => {
+    console.log(projectTaskCard);
   };
 
   // Handle Modal Toggleing
@@ -111,6 +114,7 @@ export const AppProvider = ({ children }) => {
         deleteWidget,
         updateCardSettings,
         updateProjectColumnData,
+        addProjectTaskCard,
       }}
     >
       {children}

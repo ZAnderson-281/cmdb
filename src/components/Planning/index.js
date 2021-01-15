@@ -5,18 +5,19 @@ import DndTower from "./DndTower";
 import TaskCreatorModal from "./TaskCreator";
 
 function Index() {
+  const { isModalOpen, toggleModal } = useGlobalContext();
   return (
     <div>
       <div className="title">
         <h2>Projects</h2>
-        <IconButton>
+        <IconButton onClick={toggleModal}>
           <i className="fas fa-plus"></i>
         </IconButton>
       </div>
       <section className="planning-body">
         <DndTower />
       </section>
-      {/* {isModalOpen && <TaskCreatorModal handleAddWidget={handleAddWidget} />} */}
+      {isModalOpen && <TaskCreatorModal />}
     </div>
   );
 }

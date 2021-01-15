@@ -1,27 +1,33 @@
 import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import GeneralCard from "../Cards/GeneralCard/";
 import { useGlobalContext } from "../../context";
 
 const Index = () => {
+  // Grab state and function to update from context
   const { columns, updateProjectColumnData } = useGlobalContext();
 
+  // After user drag event handle updateing state
   const handleDragEnd = (result) => {
+    // Declare a variable to act as state
     let newColumns = {};
-
-    if (!result.destination) return;
     const { source, destination } = result;
 
+    // Do nothing if its not a droppable location
+    if (!destination) return;
+
+    // If dropped in another column
     if (source.droppableId !== destination.droppableId) {
+      // Get location ids and copy column content
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
-
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
 
+      // Remove from source add to destination
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
+      // Create new state to dispatch
       newColumns = {
         ...columns,
         [source.droppableId]: {
@@ -34,11 +40,16 @@ const Index = () => {
         },
       };
     } else {
+      // If dropped in same column
+      // Get location id and copy column content
       const column = columns[source.droppableId];
       const copiedColumnItems = [...column.items];
+
+      // Remove and add at new index (Within the array)
       const [removed] = copiedColumnItems.splice(source.index, 1);
       copiedColumnItems.splice(destination.index, 0, removed);
 
+      // Create new state to dispatch
       newColumns = {
         ...columns,
         [source.droppableId]: {
@@ -47,6 +58,8 @@ const Index = () => {
         },
       };
     }
+
+    // Send to context
     updateProjectColumnData(newColumns);
   };
 
