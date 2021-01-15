@@ -119,12 +119,21 @@ def getSpecificDashboardWidget(widget_id):
             # Search each item in list for matchng id and return first matching
             widget = next(
                 (item for item in dashboard if item['id'] == widget_id))
+            data_id = widget['data_id']
+
             # Get the index for the widget and delete it from the list
             i = dashboard.index(widget)
+
             dashboard.pop(i)
+            dashboardData.pop(data_id)
             return jsonify(dashboard)
         except StopIteration:
             return jsonify({"message": "id does not exist"})
+
+
+@app.route('/Dashboard/Data', methods=['GET'])
+def getAllDashboardData():
+    return {'card_data': dashboardData}
 
 
 @app.route('/Dashboard/Data/<string:data_id>', methods=['GET'])
