@@ -10,6 +10,7 @@ function Index() {
     <div>
       <div className="title">
         <h2>Projects</h2>
+
         <IconButton onClick={toggleModal}>
           <i className="fas fa-plus"></i>
         </IconButton>

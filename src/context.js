@@ -11,11 +11,14 @@ export const AppProvider = ({ children }) => {
   const initalState = {
     pageWidgets: [],
     columns: backend,
+
+    projects: {},
+    currentProject: {},
+    taskData: {},
+
     isModalOpen: false,
+
     isUserLoggedIn: true,
-    currentUser: currentUserData,
-    logData: [],
-    commitCount: userCommitCount,
     isLoading: true,
   };
 
@@ -31,10 +34,31 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "UPDATE_DASHBOARD", payload: dashboardWidgets });
   };
 
+  const loadProjects = async () => {
+    dispatch({ type: "LOADING" });
+
+    // Load all projects
+    let response = await fetch(`${url}/Projects`);
+    const projects = await response.json();
+
+    dispatch({ type: "LOAD_PROJECTS", payload: projects });
+
+    const currentProject = projects[0];
+    response = await fetch(`${url}/Projects/Data/${currentProject.data}`);
+    const taskData = await response.json();
+    console.log(taskData);
+
+    dispatch({
+      type: "SET_CURRENT_PROJECT",
+      payload: { currentProject, taskData },
+    });
+  };
+
   const loadProjectData = async () => {};
 
   useEffect(() => {
     loadDashboard();
+    loadProjects();
   }, []);
 
   // Create New Widget

@@ -171,26 +171,50 @@ def getSpecificDashboardData(data_id):
 projectData = {
     '2a': [
         {
+            'id': uuid.uuid4().hex,
             'name': "Todo",
             'items': [
-                {"id": 1, "title": "test1", "content": "One"},
-                {"id": 2, "title": "test2", "content": "Two"},
-                {"id": 3, "title": "test3", "content": "Three"}
+                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": 3, "title": "test3", "content": "Three", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, }
             ]
         },
         {
+            'id': uuid.uuid4().hex,
             'name': "In Progress",
             'items': [
-                {"id": 1, "title": "test1", "content": "One"},
-                {"id": 2, "title": "test2", "content": "Two"},
+                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
             ]
         },
         {
+            'id': uuid.uuid4().hex,
             'name': "Completed",
             'items': [
-                {"id": 1, "title": "test1", "content": "One"},
-                {"id": 2, "title": "test2", "content": "Two"},
-            ]
+                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+            ],
         },
     ],
     '2b': [5, 2, 543, 231, 3],
@@ -216,18 +240,19 @@ projects = [
 
 @app.route('/Projects', methods=['GET'])
 def getAllProjects():
-    return {"projects": projects}
+    return jsonify(projects)
 
 
 @app.route('/Projects/<int:project_id>', methods=['GET'])
 def getSpecificProject(project_id):
+    # Search each item in list for matchng id and return first matching
     project = next((item for item in projects if item['id'] == project_id))
-    return {"project": project}
+    return jsonify(project)
 
 
 @app.route('/Projects/Data/<string:data_id>', methods=['GET'])
 def getSpecificProjectData(data_id):
-    return {"data": projectData[data_id]}
+    return jsonify(projectData[data_id])
 
 
 if __name__ == '__main__':

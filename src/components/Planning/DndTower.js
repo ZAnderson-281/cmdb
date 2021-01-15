@@ -1,6 +1,7 @@
 import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useGlobalContext } from "../../context";
+import TaskCard from "../Cards/DragDropTaskCard/";
 
 const Index = () => {
   // Grab state and function to update from context
@@ -96,7 +97,12 @@ const Index = () => {
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
                                 >
-                                  <h1>{item.content}</h1>
+                                  <TaskCard
+                                    cardTitle={item.title}
+                                    cardId={item.id}
+                                    cardSettings={item.cardSettings}
+                                    content={item.content}
+                                  />
                                 </div>
                               );
                             }}
