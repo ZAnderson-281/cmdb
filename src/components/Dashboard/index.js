@@ -1,5 +1,5 @@
 // Import general items and hooks
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useGlobalContext } from "../../context";
 
 // Import components
@@ -17,40 +17,6 @@ function Dashboard() {
     toggleModal,
     pageWidgets,
   } = useGlobalContext();
-  // Import important context variables
-
-  // create state for the dashboard
-  // const [dashboardWidgets, setDashboardWidgets] = useState([]);
-  // const [isLoading, data] = useFetch("http://localhost:5000/Dashboard");
-  // const [reloadDashboard, setReloadDashboard] = useState(false);
-  // const { isModalOpen, setIsModalOpen } = useGlobalContext();
-
-  // When the dashboard widgets are fully fetched display the content
-  // useEffect(() => {
-  //   setDashboardWidgets(data);
-  // }, [isLoading]);
-
-  // Toggle the modal for creating new widgets
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // Function that is prop drilled into the widget creator component, this creates a widget with the chosen params
-
-  /**
-   *
-   * COME BACK HERE TO COMPLETE FUNCTIONALITY
-   *
-   */
-  // const handleAddWidget = (type, name) => {
-  //   const widget = {
-  //     id: uniqid(),
-  //     type: type,
-  //     title: name,
-  //     items: [],
-  //   };
-  //   setDashboardWidgets([widget, ...dashboardWidgets.dashboard]);
-  // };
 
   // Return the correct widget based on widget array
   // NOTE: Each card passes its dataID so it can fetch its own data

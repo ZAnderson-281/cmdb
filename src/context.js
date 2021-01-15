@@ -35,52 +35,35 @@ export const AppProvider = ({ children }) => {
     loadDashboard();
   }, []);
 
+  // Create New Widget
+  const newWidgetCreation = async (type, title) => {
+    try {
+      // Post request to API to create a widget
+      const response = await fetch(`${url}/Dashboard`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: type,
+          title: title,
+        }),
+      });
+      const dashboardWidgets = await response.json();
+      // Add the widget to the dashboard
+      dispatch({
+        type: "CREATE_NEW_DASHBOARD_WIDGET",
+        payload: dashboardWidgets,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // Handle Modal Toggleing
   const toggleModal = () => {
     dispatch({ type: "TOGGLE_MODAL" });
   };
-
-  // const [columns, setColumns] = useState(backend);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isUser, setIsUser] = useState(true);
-  // const [currentUser, setCurrentUser] = useState(currentUserData);
-  // const [logData, setLogData] = useState([]);
-  // const [commitCount, setCommitCount] = useState(userCommitCount);
-
-  //  Update recent changes
-  // useEffect(() => {
-  //   // setDashboardWidgets((data) => {
-  //   //   return data.map((element) => {
-  //   //     if (element.title === "Recent Changes") {
-  //   //       return { ...element, items: logData };
-  //   //     } else {
-  //   //       return { ...element };
-  //   //     }
-  //   //   });
-  //   // });
-  // }, [logData]);
-
-  //  Update task completion
-  // useEffect(() => {
-  //   setCommitCount((prevState) => {
-  //     return prevState.map((elem, index) => {
-  //       if (elem.x === currentUser.name) {
-  //         return { ...elem, y: currentUser.commits };
-  //       }
-  //       if (prevState.length === index + 1) {
-  //         setCommitCount([
-  //           ...prevState,
-  //           {
-  //             id: uniqid(),
-  //             x: currentUser.name,
-  //             y: currentUser.commits,
-  //           },
-  //         ]);
-  //       }
-  //       return { ...elem };
-  //     });
-  //   });
-  // }, [currentUser]);
 
   return (
     <AppContext.Provider
@@ -88,6 +71,7 @@ export const AppProvider = ({ children }) => {
         ...state,
         loadDashboard,
         toggleModal,
+        newWidgetCreation,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Api
 from flask_cors import CORS, cross_origin
 
@@ -41,7 +41,7 @@ dashboardData = {
             'content': 'test'
         }
     ],
-    '1c': []
+    '1c': [],
 }
 
 dashboard = [
@@ -91,7 +91,9 @@ def getAllDashboard():
         posted_data['data_id'] = uuid.uuid4().hex
 
         dashboard.append(posted_data)
-        return "posted"
+        dashboardData[posted_data['data_id']] = []
+
+        return jsonify(posted_data)
 
 
 @app.route('/Dashboard/<int:widget_id>', methods=['GET'])

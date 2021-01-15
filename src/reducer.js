@@ -6,6 +6,16 @@ const reducer = (state, action) => {
       return { ...state, pageWidgets: action.payload, isLoading: false };
     case "TOGGLE_MODAL":
       return { ...state, isModalOpen: !state.isModalOpen };
+    case "CREATE_NEW_DASHBOARD_WIDGET":
+      // Return the new dashboard element at the beginning of the dashboard array
+      return {
+        ...state,
+        isLoading: false,
+        pageWidgets: {
+          ...state.pageWidgets,
+          dashboard: [action.payload, ...state.pageWidgets.dashboard],
+        },
+      };
   }
 
   return state;

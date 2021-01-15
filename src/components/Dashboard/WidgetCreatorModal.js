@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function WidgetCreatorModal() {
-  const { isModalOpen, toggleModal, loadDashboard } = useGlobalContext();
+  const { isModalOpen, toggleModal, newWidgetCreation } = useGlobalContext();
   const classes = useStyles();
 
   // Local state for forms
@@ -50,18 +50,8 @@ function WidgetCreatorModal() {
   };
 
   // Creates a post request to the server and triggers a dashboard re render
-  const handleAddWidget = (type, name) => {
-    fetch("http://localhost:5000/Dashboard", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: type,
-        title: name,
-      }),
-    });
-    loadDashboard();
+  const handleAddWidget = () => {
+    newWidgetCreation(type, name);
   };
 
   return (
@@ -119,13 +109,7 @@ function WidgetCreatorModal() {
               </>
             )}
 
-            <Button
-              onClick={() => {
-                handleAddWidget(type, name);
-              }}
-            >
-              Create Card
-            </Button>
+            <Button onClick={handleAddWidget}>Create Card</Button>
           </div>
         </Paper>
       </div>
