@@ -5,7 +5,11 @@ import TaskCard from "../Cards/DragDropTaskCard/";
 
 const Index = () => {
   // Grab state and function to update from context
-  const { updateProjectColumnData, taskData } = useGlobalContext();
+  const {
+    updateProjectColumnData,
+    taskData,
+    currentProject,
+  } = useGlobalContext();
 
   // After user drag event handle updateing state
   const handleDragEnd = (result) => {
@@ -85,7 +89,7 @@ const Index = () => {
     }
 
     // Send to context
-    updateProjectColumnData(taskDataCopy);
+    updateProjectColumnData(taskDataCopy, currentProject);
   };
 
   return (

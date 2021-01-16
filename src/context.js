@@ -53,8 +53,6 @@ export const AppProvider = ({ children }) => {
     });
   };
 
-  const loadProjectData = async () => {};
-
   useEffect(() => {
     loadDashboard();
     loadProjects();
@@ -111,11 +109,22 @@ export const AppProvider = ({ children }) => {
   };
 
   // Handle drag and drop from project kanban
-  const updateProjectColumnData = (newColumns) => {
+  const updateProjectColumnData = async (newColumns, currentProject) => {
     dispatch({
       type: "UPDATE_PROJECT_COLUMNS",
       payload: newColumns,
     });
+
+    const sendSave = await fetch(
+      `${url}/Projects/Data/${currentProject.data}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newColumns),
+      }
+    );
   };
 
   const addProjectTaskCard = (projectTaskCard) => {
