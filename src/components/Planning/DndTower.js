@@ -5,7 +5,7 @@ import TaskCard from "../Cards/DragDropTaskCard/";
 
 const Index = () => {
   // Grab state and function to update from context
-  const { columns, updateProjectColumnData, taskData } = useGlobalContext();
+  const { updateProjectColumnData, taskData } = useGlobalContext();
 
   // After user drag event handle updateing state
   const handleDragEnd = (result) => {
@@ -15,60 +15,83 @@ const Index = () => {
 
     // Do nothing if its not a droppable location
     if (!destination) return;
+    const taskDataCopy = [...taskData];
+    //   // Get location ids and copy column content
 
-    // If dropped in another column
     if (source.droppableId !== destination.droppableId) {
-      // Get location ids and copy column content
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
-      const sourceItems = [...sourceColumn.items];
-      const destItems = [...destColumn.items];
+      let sourceColumn;
+      let destColumn;
+      let sourceIndex = 0;
+      let destIndex = 0;
 
-      // Remove from source add to destination
-      const [removed] = sourceItems.splice(source.index, 1);
-      destItems.splice(destination.index, 0, removed);
+      for (let index = 0; index < taskData.length; index++) {
+        if (taskData[index].id === source.droppableId) {
+          sourceColumn = taskData[index];
+          sourceIndex = index;
+          break;
+        }
+      }
 
-      // Create new state to dispatch
-      newColumns = {
-        ...columns,
-        [source.droppableId]: {
-          ...sourceColumn,
-          items: sourceItems,
-        },
-        [destination.droppableId]: {
-          ...destColumn,
-          items: destItems,
-        },
+      for (let index = 0; index < taskData.length; index++) {
+        if (taskData[index].id === destination.droppableId) {
+          destColumn = taskData[index];
+          destIndex = index;
+          break;
+        }
+      }
+
+      const copiedSourceItems = [...sourceColumn.items];
+      const copiedDestItems = [...destColumn.items];
+
+      const [removed] = copiedSourceItems.splice(source.index, 1);
+      copiedDestItems.splice(destination.index, 0, removed);
+
+      const newSourceColumn = {
+        ...sourceColumn,
+        items: copiedSourceItems,
       };
+
+      const newDestColumn = {
+        ...destColumn,
+        items: copiedDestItems,
+      };
+
+      taskDataCopy.splice(sourceIndex, 1, newSourceColumn);
+      taskDataCopy.splice(destIndex, 1, newDestColumn);
     } else {
-      // If dropped in same column
-      // Get location id and copy column content
-      const column = columns[source.droppableId];
-      const copiedColumnItems = [...column.items];
+      let column;
+      let index = 0;
+
+      for (index; index < taskData.length; index++) {
+        if (taskData[index].id === source.droppableId) {
+          column = taskData[index];
+          break;
+        }
+      }
 
       // Remove and add at new index (Within the array)
+      const copiedColumnItems = [...column.items];
       const [removed] = copiedColumnItems.splice(source.index, 1);
       copiedColumnItems.splice(destination.index, 0, removed);
 
       // Create new state to dispatch
+
       newColumns = {
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          items: copiedColumnItems,
-        },
+        ...column,
+        items: copiedColumnItems,
       };
+
+      taskDataCopy.splice(index, 1, newColumns);
     }
 
     // Send to context
-    updateProjectColumnData(newColumns);
+    updateProjectColumnData(taskDataCopy);
   };
 
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
         {taskData.map((elem) => {
-          console.log(elem);
           return (
             <div key={elem.id}>
               <h2>{elem.name}</h2>
@@ -85,9 +108,6 @@ const Index = () => {
                       }}
                     >
                       {elem.items.map((item, index) => {
-                        {
-                          console.log(item);
-                        }
                         return (
                           <Draggable
                             key={item.id}

@@ -46,7 +46,6 @@ export const AppProvider = ({ children }) => {
     const currentProject = projects[0];
     response = await fetch(`${url}/Projects/Data/${currentProject.data}`);
     const taskData = await response.json();
-    console.log(taskData);
 
     dispatch({
       type: "SET_CURRENT_PROJECT",

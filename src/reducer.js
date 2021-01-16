@@ -41,7 +41,7 @@ const reducer = (state, action) => {
     case "UPDATE_PROJECT_COLUMNS":
       return {
         ...state,
-        columns: action.payload,
+        taskData: action.payload,
       };
 
     // UTILITY DISPATCHES
