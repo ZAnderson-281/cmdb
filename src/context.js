@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
     pageWidgets: [],
     columns: backend,
 
-    projects: {},
+    projects: [],
     currentProject: {},
     taskData: [],
 
@@ -81,6 +81,18 @@ export const AppProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // Change current project
+  const changeCurrentProject = async (currentProject) => {
+    const response = await fetch(`${url}/Projects/Data/${currentProject.data}`);
+    const taskData = await response.json();
+
+    console.log("ran");
+    dispatch({
+      type: "SET_CURRENT_PROJECT",
+      payload: { currentProject, taskData },
+    });
   };
 
   // Delete dashboard widget
@@ -156,6 +168,7 @@ export const AppProvider = ({ children }) => {
         updateCardSettings,
         updateProjectColumnData,
         addProjectTaskCard,
+        changeCurrentProject,
       }}
     >
       {children}

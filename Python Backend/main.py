@@ -233,8 +233,53 @@ projectData = {
             ],
         },
     ],
-    '2b': [5, 2, 543, 231, 3],
-    '2c': [2, 234234, 23, 5432, 4343]
+    '2b': [{
+        'id': uuid.uuid4().hex,
+        'name': "yanda",
+        'items': [
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+            {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
+                'cardTextColor': "#222",
+                'cardHeaderColor': "#eaeaea",
+            }, },
+            {"id": uuid.uuid4().hex, "title": "test3", "content": "Three", 'cardSettings': {
+                'cardTextColor': "#222",
+                'cardHeaderColor': "#eaeaea",
+            }, }
+        ]
+    },
+        {
+            'id': uuid.uuid4().hex,
+            'name': "WOrds",
+            'items': [
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+            ]
+    },
+        {
+            'id': uuid.uuid4().hex,
+            'name': "AHHHH",
+            'items': [
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+                {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }, },
+            ],
+    }, ],
+    '2c': []
 }
 
 projects = [
