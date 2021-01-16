@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
+
 import CardSettings from "../CardSettingsMenu/";
-import GeneralItem from "./Generaltem";
-import { CustomInput } from "../CustomInput";
 import AddItem from "./AddItem";
+import GeneralItem from "./Generaltem";
+import { useGlobalContext } from "../../../context";
+import { CustomInput } from "../CustomInput";
 
 function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [input, setInput] = useState(cardTitle);
-  const [loading, setLoading] = useState(false);
+  const { dashboardWidgetData, isLoading } = useGlobalContext();
 
   const toggleModal = () => {
     setModalIsShowing(!modalIsShowing);
@@ -50,15 +52,18 @@ function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
           }
         />
 
-        <CardContent>
+        <CardContent className="card-body">
           <AddItem />
-          {loading ? (
-            <h1>Loading</h1>
-          ) : (
-            <>
-              <GeneralItem></GeneralItem>
-            </>
-          )}
+          <>
+            {typeof dashboardWidgetData[dataId] !== "undefined" ? (
+              dashboardWidgetData[dataId].map((item) => {
+                console.log(item);
+                return <GeneralItem key={item.id} {...item} />;
+              })
+            ) : (
+              <h1>Loading</h1>
+            )}
+          </>
         </CardContent>
       </Card>
     </>

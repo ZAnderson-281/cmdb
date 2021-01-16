@@ -10,18 +10,33 @@ import {
   Avatar,
 } from "@material-ui/core";
 
-function ListCardItem({ name, description, time, content }) {
+GeneralCardItem.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
+  userName: PropTypes.string,
+  time: PropTypes.string,
+};
+
+GeneralCardItem.defaultProps = {
+  title: "Title",
+  description: "Description",
+  userName: "A",
+  time: "Time",
+  content: "No content",
+};
+
+function GeneralCardItem({ title, userName, description, time, content }) {
   const [toggle, setToggle] = useState(false);
   const toggleUi = () => {
     setToggle(!toggle);
   };
 
   return (
-    <div className="list-card-item">
+    <div className="general-card-item">
       <Card>
         <CardHeader
-          avatar={<Avatar>Z</Avatar>}
-          title={name}
+          avatar={<Avatar>{userName[0]}</Avatar>}
+          title={title}
           subheader={description}
           action={
             <IconButton onClick={toggleUi}>
@@ -49,9 +64,4 @@ function ListCardItem({ name, description, time, content }) {
   );
 }
 
-ListCardItem.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-};
-
-export default ListCardItem;
+export default GeneralCardItem;

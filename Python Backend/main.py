@@ -13,24 +13,27 @@ CORS(app)
 
 dashboardData = {
     '1a': [{
-        "id": "1",
-        'name': "Zac",
-        'description': "Testing",
-        'time': "Tests",
-        'content': 'test'
+        "id": uuid.uuid4().hex,
+        "title": "Zacs Comment",
+        'userName': "Zac",
+        'description': "Did somthing",
+        'time': "1/2/1",
+        'content': 'DGFHGVJHBKJ'
     },
         {
-        "id": "2",
-        'name': "Sam",
-        'description': "Testing",
-        'time': "Tests",
-        'content': 'test'
+        "id": uuid.uuid4().hex,
+        "title": "Sams Card",
+        'userName': "Sam",
+        'description': "vgjhbk",
+        'time': "5/5/86",
+        'content': 'fghj'
     }, {
-        "id": "3",
-        'name': "Sarah",
-        'description': "Testing",
-        'time': "Tests",
-        'content': 'test'
+        "id": uuid.uuid4().hex,
+        "title": "Sarahs Card",
+        'userName': "Sarah",
+        'description': "did more",
+        'time': "1/4/5",
+        'content': 'tejgvvhst'
     }],
     '1b': [
         {

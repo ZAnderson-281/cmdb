@@ -1,6 +1,6 @@
 //  Import general
 import React, { useContext, useEffect, useReducer } from "react";
-import { backend, currentUserData, userCommitCount } from "./MOCK";
+import { currentUserData, userCommitCount } from "./MOCK";
 import reducer from "./reducer";
 // Create global context
 const AppContext = React.createContext();
@@ -10,7 +10,8 @@ export const AppProvider = ({ children }) => {
 
   const initalState = {
     pageWidgets: [],
-    columns: backend,
+    dashboardWidgetData: [],
+    columns: [],
 
     projects: [],
     currentProject: [],
@@ -26,6 +27,13 @@ export const AppProvider = ({ children }) => {
 
   const url = "http://localhost:5000";
 
+  //  ASYNC FOR EACH LOOP
+  async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+  }
+
   // =================================================================
   //            DASHBOARD EVENTS
   // =================================================================
@@ -35,6 +43,16 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "LOADING" });
     const response = await fetch(`${url}/Dashboard`);
     const dashboardWidgets = await response.json();
+
+    dashboardWidgets.dashboard.forEach(async (item) => {
+      const response = await fetch(`${url}/Dashboard/Data/${item.data_id}`);
+      const dashboardWidgetData = await response.json();
+      dispatch({
+        type: "SET_DASHBOARD_WIDGET_DATA",
+        payload: { [item.data_id]: dashboardWidgetData.card_data },
+      });
+    });
+
     dispatch({ type: "UPDATE_DASHBOARD", payload: dashboardWidgets });
   };
 
@@ -122,6 +140,8 @@ export const AppProvider = ({ children }) => {
   const saveWidget = (widgets) => {
     console.log(widgets);
     dispatch({ type: "NEW_WIDGET_SETTINGS", payload: widgets });
+
+    // NOTE: ADD SAVE
   };
 
   // Handle drag and drop from project kanban
