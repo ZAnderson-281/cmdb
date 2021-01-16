@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 import CardSettings from "../CardSettingsMenu/";
+import GeneralItem from "./Generaltem";
 import { CustomInput } from "../CustomInput";
+import AddItem from "./AddItem";
 
 function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [input, setInput] = useState(cardTitle);
+  const [loading, setLoading] = useState(false);
 
   const toggleModal = () => {
     setModalIsShowing(!modalIsShowing);
@@ -47,7 +50,16 @@ function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
           }
         />
 
-        <CardContent>{/* <h4>{content}</h4> */}</CardContent>
+        <CardContent>
+          <AddItem />
+          {loading ? (
+            <h1>Loading</h1>
+          ) : (
+            <>
+              <GeneralItem></GeneralItem>
+            </>
+          )}
+        </CardContent>
       </Card>
     </>
   );

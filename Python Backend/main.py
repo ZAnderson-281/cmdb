@@ -55,36 +55,36 @@ dashboard = [
             'cardHeaderColor': '#eaeaea'
         }
     },
-    {
-        'id': '2',
-        'type': "lc",
-        'title': "List Card",
-        'data_id': '1b',
-        'cardSettings': {
-            'cardTextColor': '#222',
-            'cardHeaderColor': '#eaeaea'
-        }
-    },
-    {
-        'id': '3',
-        'type': "gr",
-        'title': "Graph Card",
-        'data_id': '1c',
-        'cardSettings': {
-            'cardTextColor': '#222',
-            'cardHeaderColor': '#eaeaea'
-        }
-    },
-    {
-        'id': '4',
-        'type': "dc",
-        'title': "Deadline Card",
-        'data_id': '1c',
-        'cardSettings': {
-            'cardTextColor': '#222',
-            'cardHeaderColor': '#eaeaea'
-        }
-    },
+    # {
+    #     'id': '2',
+    #     'type': "lc",
+    #     'title': "List Card",
+    #     'data_id': '1b',
+    #     'cardSettings': {
+    #         'cardTextColor': '#222',
+    #         'cardHeaderColor': '#eaeaea'
+    #     }
+    # },
+    # {
+    #     'id': '3',
+    #     'type': "gr",
+    #     'title': "Graph Card",
+    #     'data_id': '1c',
+    #     'cardSettings': {
+    #         'cardTextColor': '#222',
+    #         'cardHeaderColor': '#eaeaea'
+    #     }
+    # },
+    # {
+    #     'id': '4',
+    #     'type': "dc",
+    #     'title': "Deadline Card",
+    #     'data_id': '1c',
+    #     'cardSettings': {
+    #         'cardTextColor': '#222',
+    #         'cardHeaderColor': '#eaeaea'
+    #     }
+    # },
 ]
 
 # APP ROUTE DIR
