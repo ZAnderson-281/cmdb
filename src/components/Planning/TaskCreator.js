@@ -29,15 +29,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TaskCreatorModal({ handleAddWidget }) {
+function TaskCreatorModal() {
   const classes = useStyles();
 
-  const { toggleModal, isModalOpen, addProjectTaskCard } = useGlobalContext();
+  const {
+    toggleModal,
+    isModalOpen,
+    addProjectTaskCard,
+    taskData,
+    currentProject,
+  } = useGlobalContext();
 
   // Personal State
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [priority, setPriority] = useState("");
+  const [location, setLocation] = useState("");
 
   //   Handle Events
   const handleCardNameChange = (e) => {
@@ -46,15 +53,19 @@ function TaskCreatorModal({ handleAddWidget }) {
   const handleCardPriorityChange = (e) => {
     setPriority(e.target.value);
   };
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
   const handleFormSubmit = (e) => {
     const card = {
-      name,
+      title: name,
       content,
     };
-    addProjectTaskCard(card);
+
+    addProjectTaskCard(card, `${currentProject.data}/${location}`);
   };
 
   return (
@@ -88,13 +99,30 @@ function TaskCreatorModal({ handleAddWidget }) {
               </Select>
             </FormControl>
 
+            {/* Location */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="type-select-label">Location</InputLabel>
+              <Select
+                labelId="type-select-label"
+                value={location}
+                onChange={handleLocationChange}
+              >
+                {taskData.map((item) => {
+                  return (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+
             {/* Input Content */}
             <FormControl className={classes.formControl}>
               <TextField
                 id="standard-name"
                 label="Task"
                 value={content}
-                autoFocus
                 onChange={handleContentChange}
                 multiline
               />

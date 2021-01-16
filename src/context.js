@@ -125,10 +125,19 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(newColumns),
       }
     );
+
+    // NOTE: ADD CHECK FOR IF SAVE WENT THROUGH LATER
   };
 
-  const addProjectTaskCard = (projectTaskCard) => {
-    console.log(projectTaskCard);
+  const addProjectTaskCard = async (projectTaskCard, location) => {
+    console.log(projectTaskCard, location);
+    const addNewcard = await fetch(`${url}/Projects/Data/${location}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(projectTaskCard),
+    });
   };
 
   // Handle Modal Toggleing
