@@ -250,9 +250,32 @@ def getSpecificProject(project_id):
     return jsonify(project)
 
 
-@app.route('/Projects/Data/<string:data_id>', methods=['GET'])
+@app.route('/Projects/Data/<string:data_id>', methods=['GET', 'POST'])
 def getSpecificProjectData(data_id):
-    return jsonify(projectData[data_id])
+    if request.method == 'GET':
+        return jsonify(projectData[data_id])
+
+    if request.method == 'POST':
+        posted_data = request.get_json()
+
+        if len(posted_data) != 2:
+            return {"message": "Invalid request"}
+        if 'title' not in posted_data:
+            return {"message": "Missing required parameter title"}
+        if 'content' not in posted_data:
+            return {"message": "Missing required parameter content"}
+
+        posted_data['id'] = uuid.uuid4().hex
+        posted_data['cardSettings'] = {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
+
+        location = projectData[data_id]
+        location[0]['items'] = [posted_data] + location[0]['items']
+
+        print(posted_data)
+        return 'Posted'
 
 
 if __name__ == '__main__':
