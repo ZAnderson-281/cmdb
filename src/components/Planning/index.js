@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   InputLabel,
@@ -17,11 +17,11 @@ function Index() {
     projects,
     changeCurrentProject,
   } = useGlobalContext();
-  const [project, setProject] = useState(0);
+  const [project, setProject] = useState(1);
 
   const handleProjectChange = (e) => {
     setProject(e.target.value);
-    changeCurrentProject(projects[project], project);
+    changeCurrentProject(projects[project]);
   };
 
   return (

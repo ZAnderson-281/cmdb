@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
     columns: backend,
 
     projects: [],
-    currentProject: {},
+    currentProject: [],
     taskData: [],
 
     isModalOpen: false,
@@ -88,7 +88,6 @@ export const AppProvider = ({ children }) => {
     const response = await fetch(`${url}/Projects/Data/${currentProject.data}`);
     const taskData = await response.json();
 
-    console.log("ran");
     dispatch({
       type: "SET_CURRENT_PROJECT",
       payload: { currentProject, taskData },
