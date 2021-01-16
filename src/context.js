@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
 
     projects: {},
     currentProject: {},
-    taskData: {},
+    taskData: [],
 
     isModalOpen: false,
 

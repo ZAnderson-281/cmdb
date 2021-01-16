@@ -5,7 +5,7 @@ import TaskCard from "../Cards/DragDropTaskCard/";
 
 const Index = () => {
   // Grab state and function to update from context
-  const { columns, updateProjectColumnData } = useGlobalContext();
+  const { columns, updateProjectColumnData, taskData } = useGlobalContext();
 
   // After user drag event handle updateing state
   const handleDragEnd = (result) => {
@@ -67,7 +67,61 @@ const Index = () => {
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
-        {Object.entries(columns).map(([id, column]) => {
+        {taskData.map((elem) => {
+          console.log(elem);
+          return (
+            <div key={elem.id}>
+              <h2>{elem.name}</h2>
+              <Droppable droppableId={elem.id}>
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      style={{
+                        background: snapshot.isDraggingOver
+                          ? "lightblue"
+                          : "#fff",
+                      }}
+                    >
+                      {elem.items.map((item, index) => {
+                        {
+                          console.log(item);
+                        }
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <TaskCard
+                                    cardTitle={item.title}
+                                    cardId={item.id}
+                                    cardSettings={item.cardSettings}
+                                    content={item.content}
+                                  />
+                                </div>
+                              );
+                            }}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  );
+                }}
+              </Droppable>
+            </div>
+          );
+        })}
+        {/* {Object.entries(columns).map(([id, column]) => {
           return (
             <div key={id}>
               <h2>{column.name}</h2>
@@ -116,7 +170,7 @@ const Index = () => {
               </Droppable>
             </div>
           );
-        })}
+        })} */}
       </DragDropContext>
     </>
   );

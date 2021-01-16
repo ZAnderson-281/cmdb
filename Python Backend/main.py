@@ -174,15 +174,15 @@ projectData = {
             'id': uuid.uuid4().hex,
             'name': "Todo",
             'items': [
-                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
-                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
-                {"id": 3, "title": "test3", "content": "Three", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test3", "content": "Three", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, }
@@ -192,11 +192,11 @@ projectData = {
             'id': uuid.uuid4().hex,
             'name': "In Progress",
             'items': [
-                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
-                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
@@ -206,11 +206,11 @@ projectData = {
             'id': uuid.uuid4().hex,
             'name': "Completed",
             'items': [
-                {"id": 1, "title": "test1", "content": "One", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
-                {"id": 2, "title": "test2", "content": "Two", 'cardSettings': {
+                {"id": uuid.uuid4().hex, "title": "test2", "content": "Two", 'cardSettings': {
                     'cardTextColor': "#222",
                     'cardHeaderColor': "#eaeaea",
                 }, },
