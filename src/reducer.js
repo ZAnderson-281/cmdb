@@ -26,6 +26,14 @@ const reducer = (state, action) => {
           dashboard: action.payload,
         },
       };
+    case "NEW_WIDGET_SETTINGS":
+      return {
+        ...state,
+        pageWidgets: {
+          ...state.pageWidgets,
+          dashboard: action.payload,
+        },
+      };
 
     // PROJECT DATA DISPATCHES
     case "LOAD_PROJECTS":

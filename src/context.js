@@ -26,6 +26,10 @@ export const AppProvider = ({ children }) => {
 
   const url = "http://localhost:5000";
 
+  // =================================================================
+  //            DASHBOARD EVENTS
+  // =================================================================
+
   // Load Dashboard functionality
   const loadDashboard = async () => {
     dispatch({ type: "LOADING" });
@@ -115,8 +119,9 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const updateCardSettings = (cardSettings) => {
-    console.log("Update Card Settings");
+  const saveWidget = (widgets) => {
+    console.log(widgets);
+    dispatch({ type: "NEW_WIDGET_SETTINGS", payload: widgets });
   };
 
   // Handle drag and drop from project kanban
@@ -161,13 +166,13 @@ export const AppProvider = ({ children }) => {
       value={{
         ...state,
         loadDashboard,
-        toggleModal,
         newWidgetCreation,
         deleteWidget,
-        updateCardSettings,
+        saveWidget,
+        changeCurrentProject,
         updateProjectColumnData,
         addProjectTaskCard,
-        changeCurrentProject,
+        toggleModal,
       }}
     >
       {children}

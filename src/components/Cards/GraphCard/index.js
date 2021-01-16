@@ -22,7 +22,7 @@ function GraphCard({ cardTitle, dataId, cardId, cardSettings }) {
         <CardSettings
           cardId={cardId}
           modalIsShowing={modalIsShowing}
-          CardSettings={cardSettings}
+          cardSettings={cardSettings}
         />
         <CardHeader
           className="card-header"

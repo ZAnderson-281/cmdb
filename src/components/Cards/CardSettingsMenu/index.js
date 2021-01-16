@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardContent, Collapse, Button } from "@material-ui/core";
 import { CirclePicker } from "react-color";
 import { useGlobalContext } from "../../../context";
 
 function CardSettings({ cardId, modalIsShowing, cardSettings }) {
-  const [settings, setSettings] = useState(cardSettings);
-  const { deleteWidget, updateCardSettings } = useGlobalContext();
+  const [settings, setSettings] = useState({ ...cardSettings });
+  const { deleteWidget, saveWidget, pageWidgets } = useGlobalContext();
 
   // Header color change
   const handleChangeColor = (color) => {
@@ -13,6 +13,16 @@ function CardSettings({ cardId, modalIsShowing, cardSettings }) {
       ...settings,
       cardHeaderColor: color.hex,
     });
+    const widgets = pageWidgets.dashboard.map((item) => {
+      if (item.id === cardId) {
+        return {
+          ...item,
+          cardSettings: settings,
+        };
+      }
+      return { ...item };
+    });
+    saveWidget(widgets);
   };
 
   // Text color change
@@ -21,6 +31,16 @@ function CardSettings({ cardId, modalIsShowing, cardSettings }) {
       ...settings,
       cardTextColor: color.hex,
     });
+    const widgets = pageWidgets.dashboard.map((item) => {
+      if (item.id === cardId) {
+        return {
+          ...item,
+          cardSettings: settings,
+        };
+      }
+      return { ...item };
+    });
+    saveWidget(widgets);
   };
 
   // Settings reset
@@ -30,6 +50,16 @@ function CardSettings({ cardId, modalIsShowing, cardSettings }) {
       cardHeaderColor: "#eaeaea",
       cardTextColor: "#222",
     });
+    const widgets = pageWidgets.dashboard.map((item) => {
+      if (item.id === cardId) {
+        return {
+          ...item,
+          cardSettings: settings,
+        };
+      }
+      return { ...item };
+    });
+    saveWidget(widgets);
   };
 
   const handleDeleteWidget = () => {
@@ -49,7 +79,7 @@ function CardSettings({ cardId, modalIsShowing, cardSettings }) {
             <CirclePicker onChangeComplete={handleTextChangeColor} />
           </div>
           <Button onClick={handleReset}>Reset</Button>
-          <Button onClick={handleDeleteWidget}>DELETE</Button>
+          <Button onClick={handleDeleteWidget}>DELETE WIDGET</Button>
         </CardContent>
       </Collapse>
     </>

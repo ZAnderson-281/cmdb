@@ -22,7 +22,7 @@ function TaskCard({ cardTitle, content, cardId, cardSettings }) {
         <CardSettings
           cardId={cardId}
           modalIsShowing={modalIsShowing}
-          CardSettings={cardSettings}
+          cardSettings={cardSettings}
         />
 
         <CardHeader
