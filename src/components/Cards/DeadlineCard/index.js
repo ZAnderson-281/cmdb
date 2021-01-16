@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 import CardSettings from "../CardSettingsMenu/";
 import { CustomInput } from "../CustomInput";
+import { useGlobalContext } from "../../../context";
+
+import AddDeadline from "./AddDeadline";
+import DeadlineItem from "./DeadlineItem";
 
 function DeadlineCard({ cardTitle, dataId, cardId, cardSettings }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [input, setInput] = useState(cardTitle);
+  const { dashboardWidgetData } = useGlobalContext();
 
   const toggleModal = () => {
     setModalIsShowing(!modalIsShowing);
@@ -46,7 +51,18 @@ function DeadlineCard({ cardTitle, dataId, cardId, cardSettings }) {
           }
         />
 
-        <CardContent className="card-body"></CardContent>
+        <CardContent className="card-body">
+          <AddDeadline />
+          <>
+            {typeof dashboardWidgetData[dataId] !== "undefined" ? (
+              dashboardWidgetData[dataId].map((item) => {
+                return <DeadlineItem key={item.id} {...item} />;
+              })
+            ) : (
+              <h1>Loading</h1>
+            )}
+          </>
+        </CardContent>
       </Card>
     </>
   );

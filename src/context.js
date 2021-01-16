@@ -27,13 +27,6 @@ export const AppProvider = ({ children }) => {
 
   const url = "http://localhost:5000";
 
-  //  ASYNC FOR EACH LOOP
-  async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
-    }
-  }
-
   // =================================================================
   //            DASHBOARD EVENTS
   // =================================================================
@@ -49,7 +42,10 @@ export const AppProvider = ({ children }) => {
       const dashboardWidgetData = await response.json();
       dispatch({
         type: "SET_DASHBOARD_WIDGET_DATA",
-        payload: { [item.data_id]: dashboardWidgetData.card_data },
+        payload: {
+          id: item.data_id,
+          widgetData: dashboardWidgetData.card_data,
+        },
       });
     });
 

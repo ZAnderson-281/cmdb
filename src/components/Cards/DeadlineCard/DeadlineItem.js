@@ -11,14 +11,14 @@ import {
   Button,
 } from "@material-ui/core";
 
-GeneralCardItem.propTypes = {
+DeadlineItem.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   userName: PropTypes.string,
   time: PropTypes.string,
 };
 
-GeneralCardItem.defaultProps = {
+DeadlineItem.defaultProps = {
   title: "Title",
   description: "Description",
   userName: "A",
@@ -26,7 +26,7 @@ GeneralCardItem.defaultProps = {
   content: "No content",
 };
 
-function GeneralCardItem({ title, userName, description, time, content }) {
+function DeadlineItem({ title, userName, description, time, content }) {
   const [toggle, setToggle] = useState(false);
   const toggleUi = () => {
     setToggle(!toggle);
@@ -75,4 +75,4 @@ function GeneralCardItem({ title, userName, description, time, content }) {
   );
 }
 
-export default GeneralCardItem;
+export default DeadlineItem;

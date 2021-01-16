@@ -35,7 +35,13 @@ const reducer = (state, action) => {
         },
       };
     case "SET_DASHBOARD_WIDGET_DATA":
-      return { ...state, dashboardWidgetData: action.payload };
+      return {
+        ...state,
+        dashboardWidgetData: {
+          ...state.dashboardWidgetData,
+          [action.payload.id]: action.payload.widgetData,
+        },
+      };
 
     // PROJECT DATA DISPATCHES
     case "LOAD_PROJECTS":

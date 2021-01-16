@@ -10,7 +10,7 @@ import { CustomInput } from "../CustomInput";
 function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
   const [modalIsShowing, setModalIsShowing] = useState(false);
   const [input, setInput] = useState(cardTitle);
-  const { dashboardWidgetData, isLoading } = useGlobalContext();
+  const { dashboardWidgetData } = useGlobalContext();
 
   const toggleModal = () => {
     setModalIsShowing(!modalIsShowing);
@@ -57,7 +57,6 @@ function GeneralCard({ cardTitle, dataId, cardId, cardSettings }) {
           <>
             {typeof dashboardWidgetData[dataId] !== "undefined" ? (
               dashboardWidgetData[dataId].map((item) => {
-                console.log(item);
                 return <GeneralItem key={item.id} {...item} />;
               })
             ) : (
