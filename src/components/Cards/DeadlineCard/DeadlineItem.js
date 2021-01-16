@@ -41,16 +41,18 @@ function DeadlineItem({ title, userName, description, time, content }) {
       <Card>
         <CardHeader
           avatar={<Avatar>{userName[0]}</Avatar>}
-          title={title}
-          subheader={description}
+          title={<strong>{title}</strong>}
+          subheader={<strong>{time}</strong>}
           action={
-            <IconButton onClick={toggleUi}>
-              <i className="fas fa-chevron-down"></i>
-            </IconButton>
+            <>
+              <IconButton onClick={deleteItem}>
+                <i className="fas fa-trash"></i>
+              </IconButton>
+            </>
           }
         />
 
-        <Collapse in={toggle}>
+        {/* <Collapse in={toggle}>
           <CardContent>
             <ul>
               <li>
@@ -69,7 +71,7 @@ function DeadlineItem({ title, userName, description, time, content }) {
               Delete
             </Button>
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
     </div>
   );

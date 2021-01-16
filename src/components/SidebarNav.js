@@ -11,12 +11,18 @@ function SidebarNav() {
           <h6>Home</h6>
         </div>
       </Link>
-      <Link to="/Planning">
+      <Link to="/Projects">
         <div className="sidebar-link " onClick={handleLinkClick}>
           <i className="fas fa-tasks"></i>
           <h6>Project</h6>
         </div>
       </Link>
+      {/* <Link to="/Calander">
+        <div className="sidebar-link " onClick={handleLinkClick}>
+          <i class="fas fa-calendar-week"></i>
+          <h6>Calander</h6>
+        </div>
+      </Link> */}
       <Link to="/Settings">
         <div className="sidebar-link" onClick={handleLinkClick}>
           <i className="fas fa-cog"></i>

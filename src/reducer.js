@@ -60,13 +60,38 @@ const reducer = (state, action) => {
         taskData: action.payload,
       };
 
+    // USER DISPATCHES
+    case "UPDATE_USER_COMMITS":
+      return {
+        ...state,
+        currentUserData: {
+          ...state.currentUserData,
+          commits: action.payload.userData.commits + 1,
+        },
+        trackableData: {
+          ...state.trackableData,
+        },
+      };
+
     // UTILITY DISPATCHES
     case "TOGGLE_MODAL":
       return { ...state, isModalOpen: !state.isModalOpen };
 
+    case "CREATE_NOTIFICATION":
+      return {
+        ...state,
+        trackableData: {
+          ...state.trackableData,
+          hardTrackables: {
+            ...state.trackableData.hardTrackables,
+            logs: [action.payload, ...state.trackableData.hardTrackables.logs],
+          },
+        },
+      };
+
     default:
       console.log("DEFAULT CASE");
-      return state;
+      return;
   }
 };
 

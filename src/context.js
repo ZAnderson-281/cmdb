@@ -1,6 +1,6 @@
 //  Import general
 import React, { useContext, useEffect, useReducer } from "react";
-import { currentUserData, userCommitCount } from "./MOCK";
+import { currentUserData, trackableData } from "./MOCK";
 import reducer from "./reducer";
 // Create global context
 const AppContext = React.createContext();
@@ -17,8 +17,10 @@ export const AppProvider = ({ children }) => {
     currentProject: [],
     taskData: [],
 
-    isModalOpen: false,
+    currentUserData: currentUserData,
+    trackableData: { trackableData, hardTrackables: { logs: [] } },
 
+    isModalOpen: false,
     isUserLoggedIn: true,
     isLoading: true,
   };
@@ -161,6 +163,18 @@ export const AppProvider = ({ children }) => {
     // NOTE: ADD CHECK FOR IF SAVE WENT THROUGH LATER
   };
 
+  const addToWatchCount = (user) => {
+    const id = "a";
+    dispatch({
+      type: "UPDATE_USER_COMMITS",
+      payload: { userData: user, trackableData: trackableData[id] },
+    });
+  };
+
+  const createNotification = (data) => {
+    dispatch({ type: "CREATE_NOTIFICATION", payload: data });
+  };
+
   const addProjectTaskCard = async (projectTaskCard, location) => {
     console.log(projectTaskCard, location);
     const addNewcard = await fetch(`${url}/Projects/Data/${location}`, {
@@ -189,6 +203,8 @@ export const AppProvider = ({ children }) => {
         updateProjectColumnData,
         addProjectTaskCard,
         toggleModal,
+        addToWatchCount,
+        createNotification,
       }}
     >
       {children}

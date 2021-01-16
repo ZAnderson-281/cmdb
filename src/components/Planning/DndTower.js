@@ -9,6 +9,9 @@ const Index = () => {
     updateProjectColumnData,
     taskData,
     currentProject,
+    addToWatchCount,
+    currentUserData,
+    createNotification,
   } = useGlobalContext();
 
   // After user drag event handle updateing state
@@ -47,6 +50,10 @@ const Index = () => {
       const copiedSourceItems = [...sourceColumn.items];
       const copiedDestItems = [...destColumn.items];
 
+      if (destColumn.name === taskDataCopy[taskDataCopy.length - 1].name) {
+        addToWatchCount(currentUserData);
+      }
+
       const [removed] = copiedSourceItems.splice(source.index, 1);
       copiedDestItems.splice(destination.index, 0, removed);
 
@@ -62,6 +69,12 @@ const Index = () => {
 
       taskDataCopy.splice(sourceIndex, 1, newSourceColumn);
       taskDataCopy.splice(destIndex, 1, newDestColumn);
+
+      createNotification({
+        notification: `${currentUserData.name} moved ${removed.title} to ${destColumn.name}`,
+        project: currentProject,
+        user: currentUserData,
+      });
     } else {
       let column;
       let index = 0;

@@ -37,14 +37,17 @@ dashboardData = {
     }],
     '1b': [
         {
-            "id": "3",
-            'name': "Sarah",
-            'description': "Testing",
-            'time': "Tests",
-            'content': 'test'
+            "id": uuid.uuid4().hex,
+            "title": "Add commit counter for project section",
+            'userName': "Zac Andrerson",
+            'description': "",
+            'time': "1/4/5",
+            'content': 'tejgvvhst'
         }
     ],
-    '1c': [],
+    '1c': [
+
+    ]
 }
 
 dashboard = [
@@ -58,26 +61,26 @@ dashboard = [
             'cardHeaderColor': '#eaeaea'
         }
     },
-    # {
-    #     'id': '2',
-    #     'type': "lc",
-    #     'title': "List Card",
-    #     'data_id': '1b',
-    #     'cardSettings': {
-    #         'cardTextColor': '#222',
-    #         'cardHeaderColor': '#eaeaea'
-    #     }
-    # },
-    # {
-    #     'id': '3',
-    #     'type': "gr",
-    #     'title': "Graph Card",
-    #     'data_id': '1c',
-    #     'cardSettings': {
-    #         'cardTextColor': '#222',
-    #         'cardHeaderColor': '#eaeaea'
-    #     }
-    # },
+    {
+        'id': '2',
+        'type': "dc",
+        'title': "Deadline Card",
+        'data_id': '1b',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
+    },
+    {
+        'id': '3',
+        'type': "lc",
+        'title': "Commit Card",
+        'data_id': '1c',
+        'cardSettings': {
+            'cardTextColor': '#222',
+            'cardHeaderColor': '#eaeaea'
+        }
+    },
     # {
     #     'id': '4',
     #     'type': "dc",

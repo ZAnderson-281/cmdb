@@ -24,6 +24,10 @@ export const userCommitCount = [
   },
 ];
 
+export const trackableData = {
+  a: userCommitCount,
+};
+
 // Mock User Data
 export const currentUserData = {
   id: uniqid(),

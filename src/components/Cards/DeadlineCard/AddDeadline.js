@@ -31,19 +31,19 @@ function ListCardItem() {
   const classes = useStyles();
 
   const [toggle, setToggle] = useState(false);
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
+  const [deadlineName, setDeadlineName] = useState("");
+  const [deadline, setDeadline] = useState("");
 
   const toggleModal = () => {
     setToggle(!toggle);
   };
-  const handleCardNameChange = (e) => {
-    setName(e.target.value);
+  const handleDeadlineEntry = (e) => {
+    setDeadlineName(e.target.value);
   };
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
+  const handleDeadlineChange = (e) => {
+    setDeadline(e.target.value);
   };
-  const handleAddGeneralItem = () => {
+  const handleAddDeadlineItem = () => {
     console.log("add");
   };
 
@@ -56,33 +56,34 @@ function ListCardItem() {
         <Modal className={classes.modal} open={toggle} onClose={toggleModal}>
           <div className="modal-container">
             <Paper className={classes.paper}>
-              <h3 className="title">General Item</h3>
+              <h3 className="title">Deadline Item</h3>
               <div className="modal-form">
                 {/* Name Select */}
                 <FormControl className={classes.formControl}>
                   <TextField
                     id="standard-name"
-                    label="Card Name"
-                    value={name}
+                    label="Deadline Name"
+                    value={deadlineName}
                     autoFocus
-                    onChange={handleCardNameChange}
+                    onChange={handleDeadlineEntry}
                   />
                 </FormControl>
 
                 {/* Text Select */}
                 <FormControl className={classes.formControl}>
                   <TextField
-                    id="standard-name"
-                    label="Content"
-                    value={content}
-                    onChange={handleContentChange}
-                    multiline
-                    rows={7}
+                    id="Deadline-time"
+                    label="Deadline Time"
+                    type="datetime-local"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </FormControl>
 
                 {/* Add Content */}
-                <Button onClick={handleAddGeneralItem}>Add to widget</Button>
+                <Button onClick={handleAddDeadlineItem}>Add to widget</Button>
               </div>
             </Paper>
           </div>
