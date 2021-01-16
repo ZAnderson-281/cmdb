@@ -87,6 +87,22 @@ dashboard = [
     },
 ]
 
+# APP ROUTE DIR
+
+
+@app.route('/', methods=['GET'])
+def getAllAppRoutes():
+    return jsonify(
+        {
+            "/Dashboard": {
+
+            },
+            "/Projects": {
+
+            }
+        }
+    )
+
 # Dashboard Routing
 
 
@@ -262,30 +278,48 @@ def getSpecificProjectData(data_id):
 
     if request.method == 'POST':
         posted_data = request.get_json()
-        print(posted_data)
+
         projectData[data_id] = posted_data
         return 'Posted'
 
-    #     if len(posted_data) != 2:
-    #         return {"message": "Invalid request"}
-    #     if 'title' not in posted_data:
-    #         return {"message": "Missing required parameter title"}
-    #     if 'content' not in posted_data:
-    #         return {"message": "Missing required parameter content"}
 
-    #     posted_data['id'] = uuid.uuid4().hex
-    #     posted_data['cardSettings'] = {
-    #         'cardTextColor': '#222',
-    #         'cardHeaderColor': '#eaeaea'
-    #     }
+# INDIVIDUAL PROJECT SECTION DATA
+@app.route('/Projects/Data/<string:data_id>/<string:section_id>', methods=['GET', 'POST', 'DELETE'])
+def getProjectCardData(data_id, section_id):
+    if request.method == 'GET':
+        data = projectData[data_id]
+        # return jsonify(data)
+        found = False
 
-    #     location = projectData[data_id]
-    #     location[0]['items'] = [posted_data] + location[0]['items']
+        for item in data:
+            if item['id'] == section_id:
+                found = True
+        if found == True:
+            return jsonify(item)
+        else:
+            return jsonify({"message": "Id does not exist"})
 
-    #     print(posted_data)
-    #     return 'Posted'
+    if request.method == 'POST':
+        data = projectData[data_id]
+        # return jsonify(data)
+        found = False
 
-# INDIVIDUAL CARD DATA
+        for item in data:
+            if item['id'] == section_id:
+                found = True
+                posted_data = request.get_json()
+                posted_data['id'] = uuid.uuid4().hex
+                posted_data['cardSettings'] = {
+                    'cardTextColor': "#222",
+                    'cardHeaderColor': "#eaeaea",
+                }
+
+                item['items'] = [posted_data] + item['items']
+
+        if found == True:
+            return jsonify(item)
+        else:
+            return jsonify({"message": "Id does not exist"})
 
 
 if __name__ == '__main__':
