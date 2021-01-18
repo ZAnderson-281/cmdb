@@ -54,7 +54,7 @@ dashboard = [
     {
         'id': '1',
         'type': "gc",
-        'title': "General Card",
+        'title': "Notes",
         'data_id': '1a',
         'cardSettings': {
             'cardTextColor': '#222',
@@ -64,7 +64,7 @@ dashboard = [
     {
         'id': '2',
         'type': "dc",
-        'title': "Deadline Card",
+        'title': "Deadline",
         'data_id': '1b',
         'cardSettings': {
             'cardTextColor': '#222',
@@ -74,7 +74,7 @@ dashboard = [
     {
         'id': '3',
         'type': "lc",
-        'title': "Commit Card",
+        'title': "Notifications",
         'data_id': '1c',
         'cardSettings': {
             'cardTextColor': '#222',
@@ -147,7 +147,7 @@ def getAllDashboard():
         return jsonify(posted_data)
 
 
-@app.route('/Dashboard/<string:widget_id>', methods=['GET', 'DELETE'])
+@app.route('/Dashboard/<string:widget_id>', methods=['GET', 'DELETE', 'PUT'])
 def getSpecificDashboardWidget(widget_id):
 
     # GET Request
@@ -241,7 +241,7 @@ projectData = {
     ],
     '2b': [{
         'id': uuid.uuid4().hex,
-        'name': "yanda",
+        'name': "Todo",
         'items': [
                 {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
@@ -259,7 +259,7 @@ projectData = {
     },
         {
             'id': uuid.uuid4().hex,
-            'name': "WOrds",
+            'name': "In Progress",
             'items': [
                 {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
@@ -273,7 +273,7 @@ projectData = {
     },
         {
             'id': uuid.uuid4().hex,
-            'name': "AHHHH",
+            'name': "Completed",
             'items': [
                 {"id": uuid.uuid4().hex, "title": "test1", "content": "One", 'cardSettings': {
                     'cardTextColor': "#222",
@@ -291,12 +291,12 @@ projectData = {
 projects = [
     {
         "id": 1,
-        "name": "Testing project naming",
+        "name": "Project 1",
         "data": "2a"
     },
     {
         "id": 2,
-        "name": "Testing project naming Two",
+        "name": "Project 2",
         "data": "2b"
     },
 

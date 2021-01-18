@@ -38,6 +38,7 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "LOADING" });
     const response = await fetch(`${url}/Dashboard`);
     const dashboardWidgets = await response.json();
+    console.log(dashboardWidgets);
 
     dashboardWidgets.dashboard.forEach(async (item) => {
       const response = await fetch(`${url}/Dashboard/Data/${item.data_id}`);
@@ -135,11 +136,8 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const saveWidget = (widgets) => {
-    console.log(widgets);
+  const saveWidget = async (widgets) => {
     dispatch({ type: "NEW_WIDGET_SETTINGS", payload: widgets });
-
-    // NOTE: ADD SAVE
   };
 
   // Handle drag and drop from project kanban

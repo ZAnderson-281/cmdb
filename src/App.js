@@ -8,7 +8,6 @@ import SidebarNav from "./components/SidebarNav";
 // import Dashboard from "./components/Dashboard";
 import Error from "./components/Error/";
 import Planning from "./components/Planning/";
-import Calander from "./components/Calander/";
 import Settings from "./components/Settings/";
 import Dashboard from "./components/Dashboard/";
 
@@ -26,9 +25,6 @@ function App() {
             <Route exact path="/Projects">
               <Planning />
             </Route>
-            {/* <Route exact path="/Calander">
-              <Calander />
-            </Route> */}
             <Route exact path="/Settings">
               <Settings />
             </Route>
